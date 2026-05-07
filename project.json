@@ -1,0 +1,28 @@
+{
+  "overview": "Premium 3D luxury website for AS Makeover and Makeup Studio — SFX & Prosthetic Makeup specialists in Jodhpur, Rajasthan. Features full Three.js 3D animations, beige/brown luxury theme with glow effects, complete portfolio gallery, celebrity work showcase, reviews, FAQ, and interactive contact features.",
+  "features": [
+    "3D animated hero with Three.js particle canvas",
+    "8 animated service cards",
+    "Portfolio gallery with 15+ work photos",
+    "Celebrity & T-Series work showcase",
+    "About/owner section with credentials",
+    "Indian reviews with 5-star ratings",
+    "FAQ accordion",
+    "Google Maps embed",
+    "Floating WhatsApp & Instagram buttons",
+    "Premium beige/brown luxury theme with glow effects"
+  ],
+  "category": "portfolio",
+  "tags": [
+    "makeup",
+    "beauty",
+    "sfx",
+    "prosthetic",
+    "3d-animations",
+    "luxury",
+    "portfolio",
+    "jodhpur",
+    "bridal"
+  ],
+  "last_updated": "2026-05-07T09:26:12.782Z"
+}
