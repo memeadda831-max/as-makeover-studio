@@ -1,50 +1,276 @@
 import { IMAGES } from "@/utils/assets";
+import { useEffect, useRef, useState } from "react";
 
-const TSERIES_WORKS = [
+type TSeriesWork = {
+  img: string;
+  title: string;
+  subtitle: string;
+  viewCount: number;
+  featured: boolean;
+};
+
+const TSERIES_WORKS: TSeriesWork[] = [
   {
     img: IMAGES.tseries.dhoraMathJhupadi,
     title: "Dhora Mathe Jhupadi",
-    subtitle: "Rajasthani T-Series Music Video",
-    views: "10M+ Views",
+    subtitle: "Rajasthani Folk \u2014 T-Series",
+    viewCount: 10,
+    featured: false,
   },
   {
     img: IMAGES.tseries.chitarJyo,
     title: "Chitar Jyo Ji Mhane",
     subtitle: "T-Series Rajasthani Production",
-    views: "8M+ Views",
+    viewCount: 8,
+    featured: true,
   },
   {
     img: IMAGES.tseries.saajan,
     title: "Saajan",
     subtitle: "T-Series Music Video",
-    views: "5M+ Views",
+    viewCount: 5,
+    featured: false,
   },
   {
     img: IMAGES.tseries.italPital,
     title: "Ital Pital",
-    subtitle: "Maati Beats T-Series",
-    views: "6M+ Views",
+    subtitle: "Maati Beats \u2014 T-Series",
+    viewCount: 6,
+    featured: true,
   },
 ];
 
 const ACHIEVEMENTS = [
   {
-    icon: "🎬",
+    icon: "\uD83C\uDFAC",
     label: "Official T-Series Artist",
     sub: "Multiple music videos",
   },
-  { icon: "🎥", label: "Film Credited", sub: "Eight O Clock" },
-  { icon: "⭐", label: "Celebrity Makeup", sub: "Bollywood collaborations" },
+  { icon: "\uD83C\uDFA5", label: "Film Credited", sub: "Eight O Clock" },
   {
-    icon: "🎓",
+    icon: "\u2B50",
+    label: "Celebrity Makeup",
+    sub: "Bollywood collaborations",
+  },
+  {
+    icon: "\uD83C\uDF93",
     label: "Bombay School Alumni",
     sub: "Advance Prosthetic Certified",
   },
 ];
 
+function useCountUp(target: number, active: boolean) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    setCount(0);
+    let current = 0;
+    const step = Math.max(1, Math.ceil(target / 40));
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(current);
+      }
+    }, 40);
+    return () => clearInterval(timer);
+  }, [active, target]);
+  return count;
+}
+
+function TSeriesCard({
+  work,
+  index,
+  inView,
+}: {
+  work: TSeriesWork;
+  index: number;
+  inView: boolean;
+}) {
+  const count = useCountUp(work.viewCount, inView);
+
+  return (
+    <div
+      data-ocid={`celebrity.tseries_item.${index + 1}`}
+      style={{
+        position: "relative",
+        borderRadius: 20,
+        overflow: "hidden",
+        border: work.featured
+          ? "1px solid rgba(196,149,106,0.6)"
+          : "1px solid rgba(196,149,106,0.3)",
+        boxShadow: work.featured
+          ? "0 8px 40px rgba(0,0,0,0.4), 0 0 40px rgba(196,149,106,0.18)"
+          : "0 8px 40px rgba(0,0,0,0.4), 0 0 30px rgba(196,149,106,0.08)",
+        transition: "all 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
+      }}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget as HTMLDivElement;
+        el.style.transform = "translateY(-8px) scale(1.02)";
+        el.style.boxShadow =
+          "0 24px 70px rgba(0,0,0,0.5), 0 0 60px rgba(196,149,106,0.25)";
+        el.style.borderColor = "#C4956A";
+        const shimmer = el.querySelector(
+          ".tseries-shimmer",
+        ) as HTMLDivElement | null;
+        if (shimmer) shimmer.style.opacity = "1";
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget as HTMLDivElement;
+        el.style.transform = "translateY(0) scale(1)";
+        el.style.boxShadow = work.featured
+          ? "0 8px 40px rgba(0,0,0,0.4), 0 0 40px rgba(196,149,106,0.18)"
+          : "0 8px 40px rgba(0,0,0,0.4), 0 0 30px rgba(196,149,106,0.08)";
+        el.style.borderColor = work.featured
+          ? "rgba(196,149,106,0.6)"
+          : "rgba(196,149,106,0.3)";
+        const shimmer = el.querySelector(
+          ".tseries-shimmer",
+        ) as HTMLDivElement | null;
+        if (shimmer) shimmer.style.opacity = "0";
+      }}
+    >
+      <div style={{ position: "relative" }}>
+        <img
+          src={work.img}
+          alt={work.title}
+          style={{
+            width: "100%",
+            height: 280,
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+        {/* Hover shimmer */}
+        <div
+          className="tseries-shimmer"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(105deg, transparent 30%, rgba(255,248,240,0.12) 50%, transparent 70%)",
+            opacity: 0,
+            transition: "opacity 0.3s ease",
+            pointerEvents: "none",
+          }}
+        />
+        {/* Featured ribbon */}
+        {work.featured && (
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              background: "linear-gradient(135deg, #C4956A, #E8C99A)",
+              color: "#3D2B1F",
+              fontSize: 9,
+              fontWeight: 900,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              padding: "6px 14px 6px 20px",
+              clipPath: "polygon(12px 0%, 100% 0%, 100% 100%, 0% 100%)",
+              boxShadow: "0 2px 12px rgba(196,149,106,0.5)",
+            }}
+          >
+            \u2726 FEATURED
+          </div>
+        )}
+        {/* T-Series badge */}
+        <div
+          style={{
+            position: "absolute",
+            top: 14,
+            left: 14,
+            background: "#FF0000",
+            color: "#fff",
+            padding: "4px 12px",
+            borderRadius: 6,
+            fontSize: 11,
+            fontWeight: 900,
+            letterSpacing: "0.08em",
+            boxShadow: "0 2px 12px rgba(255,0,0,0.4)",
+          }}
+        >
+          T-SERIES
+        </div>
+      </div>
+
+      <div
+        style={{ padding: "16px 18px 20px", background: "rgba(26,16,10,0.95)" }}
+      >
+        <div
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 17,
+            fontWeight: 700,
+            color: "#E8C99A",
+            marginBottom: 4,
+          }}
+        >
+          {work.title}
+        </div>
+        <div style={{ fontSize: 12, color: "#9A7B5C", marginBottom: 12 }}>
+          {work.subtitle}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            borderTop: "1px solid rgba(196,149,106,0.2)",
+            paddingTop: 10,
+          }}
+        >
+          <div
+            style={{
+              fontSize: 10,
+              color: "#C4956A",
+              fontWeight: 800,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}
+          >
+            \u2726 Makeup by Shila Kashyap
+          </div>
+          <div
+            style={{
+              fontSize: 12,
+              fontWeight: 800,
+              color: "#E8C99A",
+              background: "rgba(196,149,106,0.1)",
+              border: "1px solid rgba(196,149,106,0.3)",
+              padding: "2px 8px",
+              borderRadius: 20,
+            }}
+          >
+            {inView ? `${count}M+` : "\u2014"} \uD83D\uDC41
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function CelebritySection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.15 },
+    );
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       data-ocid="celebrity.section"
       style={{
         background:
@@ -108,7 +334,7 @@ export default function CelebritySection() {
               backdropFilter: "blur(8px)",
             }}
           >
-            <span style={{ fontSize: 18 }}>🎦</span>
+            <span style={{ fontSize: 18 }}>\uD83C\uDFA6</span>
             <span
               style={{
                 color: "#C4956A",
@@ -154,7 +380,7 @@ export default function CelebritySection() {
             }}
           >
             Makeup by{" "}
-            <strong style={{ color: "#E8C99A" }}>Shila Kashyap</strong> —
+            <strong style={{ color: "#E8C99A" }}>Shila Kashyap</strong> \u2014
             Official Artist for Major Bollywood Music Videos & Films
           </p>
         </div>
@@ -165,247 +391,170 @@ export default function CelebritySection() {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
             gap: 24,
-            marginBottom: 64,
+            marginBottom: 56,
           }}
         >
           {TSERIES_WORKS.map((work, i) => (
-            <div
+            <TSeriesCard
               key={work.title}
-              data-ocid={`celebrity.tseries_item.${i + 1}`}
-              style={{
-                position: "relative",
-                borderRadius: 20,
-                overflow: "hidden",
-                border: "1px solid rgba(196,149,106,0.3)",
-                boxShadow:
-                  "0 8px 40px rgba(0,0,0,0.4), 0 0 30px rgba(196,149,106,0.1)",
-                transition: "all 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.transform =
-                  "translateY(-6px) scale(1.02)";
-                (e.currentTarget as HTMLDivElement).style.boxShadow =
-                  "0 20px 60px rgba(0,0,0,0.5), 0 0 50px rgba(196,149,106,0.2)";
-                (e.currentTarget as HTMLDivElement).style.borderColor =
-                  "#C4956A";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLDivElement).style.transform =
-                  "translateY(0) scale(1)";
-                (e.currentTarget as HTMLDivElement).style.boxShadow =
-                  "0 8px 40px rgba(0,0,0,0.4), 0 0 30px rgba(196,149,106,0.1)";
-                (e.currentTarget as HTMLDivElement).style.borderColor =
-                  "rgba(196,149,106,0.3)";
-              }}
-            >
-              <img
-                src={work.img}
-                alt={work.title}
-                style={{
-                  width: "100%",
-                  height: 280,
-                  objectFit: "cover",
-                  display: "block",
-                }}
-              />
-              {/* T-Series badge */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: 14,
-                  left: 14,
-                  background: "#FF0000",
-                  color: "#fff",
-                  padding: "4px 12px",
-                  borderRadius: 6,
-                  fontSize: 11,
-                  fontWeight: 900,
-                  letterSpacing: "0.08em",
-                  boxShadow: "0 2px 12px rgba(255,0,0,0.4)",
-                }}
-              >
-                T-SERIES
-              </div>
-              {/* Views badge */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: 14,
-                  right: 14,
-                  background: "rgba(196,149,106,0.9)",
-                  color: "#3D2B1F",
-                  padding: "4px 10px",
-                  borderRadius: 6,
-                  fontSize: 10,
-                  fontWeight: 800,
-                }}
-              >
-                {work.views}
-              </div>
-              <div
-                style={{
-                  padding: "16px 18px 20px",
-                  background: "rgba(26,16,10,0.9)",
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: 17,
-                    fontWeight: 700,
-                    color: "#E8C99A",
-                    marginBottom: 4,
-                  }}
-                >
-                  {work.title}
-                </div>
-                <div
-                  style={{ fontSize: 12, color: "#9A7B5C", marginBottom: 10 }}
-                >
-                  {work.subtitle}
-                </div>
-                <div
-                  style={{
-                    fontSize: 10,
-                    color: "#C4956A",
-                    fontWeight: 800,
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    borderTop: "1px solid rgba(196,149,106,0.2)",
-                    paddingTop: 10,
-                  }}
-                >
-                  ✦ MAKEUP BY SHILA KASHYAP
-                </div>
-              </div>
-            </div>
+              work={work}
+              index={i}
+              inView={inView}
+            />
           ))}
+        </div>
+
+        {/* Golden divider between T-Series and Celebrity Collaborations */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 20,
+            marginBottom: 56,
+          }}
+        >
+          <div
+            style={{
+              flex: 1,
+              height: 1,
+              background:
+                "linear-gradient(90deg, transparent, rgba(196,149,106,0.4))",
+            }}
+          />
+          <div
+            style={{
+              padding: "8px 20px",
+              border: "1px solid rgba(196,149,106,0.4)",
+              borderRadius: 50,
+              fontSize: 12,
+              fontWeight: 700,
+              color: "#C4956A",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              backdropFilter: "blur(8px)",
+              background: "rgba(196,149,106,0.05)",
+            }}
+          >
+            \u2726 Celebrity Collaborations \u2726
+          </div>
+          <div
+            style={{
+              flex: 1,
+              height: 1,
+              background:
+                "linear-gradient(90deg, rgba(196,149,106,0.4), transparent)",
+            }}
+          />
         </div>
 
         {/* Celebrity collaborations */}
         <div style={{ marginBottom: 72 }}>
-          <h3
-            style={{
-              textAlign: "center",
-              fontFamily: "var(--font-display)",
-              fontSize: 30,
-              fontWeight: 700,
-              color: "#E8C99A",
-              marginBottom: 32,
-              letterSpacing: "0.02em",
-            }}
-          >
-            Celebrity Collaborations
-          </h3>
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: 24,
-              maxWidth: 700,
+              maxWidth: 760,
               margin: "0 auto",
             }}
           >
-            <div
-              data-ocid="celebrity.collab_item.1"
-              style={{
-                borderRadius: 20,
-                overflow: "hidden",
-                border: "1px solid rgba(196,149,106,0.3)",
-                boxShadow: "0 8px 40px rgba(0,0,0,0.4)",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.transform =
-                  "translateY(-6px)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLDivElement).style.transform =
-                  "translateY(0)";
-              }}
-            >
-              <img
-                src={IMAGES.movie.bmVyas}
-                alt="BM Vyas Celebrity"
-                style={{
-                  width: "100%",
-                  height: 300,
-                  objectFit: "cover",
-                  display: "block",
-                }}
-              />
+            {[
+              {
+                img: IMAGES.movie.bmVyas,
+                alt: "BM Vyas \u2014 Celebrity Makeup",
+                title: "BM Vyas \u2014 Bollywood Celebrity",
+                sub: "Exclusive celebrity makeup services",
+                badge: "\u2B50 Celebrity",
+                ocid: "celebrity.collab_item.1",
+              },
+              {
+                img: IMAGES.movie.eightOClock,
+                alt: "Eight O Clock Short Film",
+                title: '"Eight O Clock" \u2014 Short Film',
+                sub: "Screen Credit: Makeup by Shila Kashyap",
+                badge: "\uD83C\uDFAC Film Credit",
+                ocid: "celebrity.collab_item.2",
+              },
+            ].map((collab) => (
               <div
+                key={collab.ocid}
+                data-ocid={collab.ocid}
                 style={{
-                  padding: "16px 18px",
-                  background: "rgba(26,16,10,0.9)",
+                  borderRadius: 20,
+                  overflow: "hidden",
+                  border: "1px solid rgba(196,149,106,0.3)",
+                  boxShadow: "0 8px 40px rgba(0,0,0,0.4)",
+                  transition: "all 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
+                  position: "relative",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLDivElement;
+                  el.style.transform =
+                    "perspective(800px) rotateX(-2deg) rotateY(3deg) translateY(-6px)";
+                  el.style.boxShadow =
+                    "0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(196,149,106,0.2)";
+                  el.style.borderColor = "#C4956A";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLDivElement;
+                  el.style.transform =
+                    "perspective(800px) rotateX(0) rotateY(0) translateY(0)";
+                  el.style.boxShadow = "0 8px 40px rgba(0,0,0,0.4)";
+                  el.style.borderColor = "rgba(196,149,106,0.3)";
                 }}
               >
+                <div style={{ position: "relative" }}>
+                  <img
+                    src={collab.img}
+                    alt={collab.alt}
+                    style={{
+                      width: "100%",
+                      height: 300,
+                      objectFit: "cover",
+                      display: "block",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 12,
+                      left: 12,
+                      background: "rgba(26,16,10,0.85)",
+                      border: "1px solid rgba(196,149,106,0.4)",
+                      color: "#E8C99A",
+                      padding: "4px 12px",
+                      borderRadius: 6,
+                      fontSize: 11,
+                      fontWeight: 800,
+                      backdropFilter: "blur(8px)",
+                    }}
+                  >
+                    {collab.badge}
+                  </div>
+                </div>
                 <div
                   style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: 16,
-                    fontWeight: 700,
-                    color: "#E8C99A",
-                    marginBottom: 4,
+                    padding: "16px 18px",
+                    background: "rgba(26,16,10,0.9)",
                   }}
                 >
-                  BM Vyas — Celebrity Collaboration
-                </div>
-                <div style={{ fontSize: 12, color: "#9A7B5C" }}>
-                  Professional celebrity makeup services
-                </div>
-              </div>
-            </div>
-            <div
-              data-ocid="celebrity.collab_item.2"
-              style={{
-                borderRadius: 20,
-                overflow: "hidden",
-                border: "1px solid rgba(196,149,106,0.3)",
-                boxShadow: "0 8px 40px rgba(0,0,0,0.4)",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.transform =
-                  "translateY(-6px)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLDivElement).style.transform =
-                  "translateY(0)";
-              }}
-            >
-              <img
-                src={IMAGES.movie.eightOClock}
-                alt="Eight O Clock Film"
-                style={{
-                  width: "100%",
-                  height: 300,
-                  objectFit: "cover",
-                  display: "block",
-                }}
-              />
-              <div
-                style={{
-                  padding: "16px 18px",
-                  background: "rgba(26,16,10,0.9)",
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: 16,
-                    fontWeight: 700,
-                    color: "#E8C99A",
-                    marginBottom: 4,
-                  }}
-                >
-                  "Eight O Clock" — Short Film
-                </div>
-                <div style={{ fontSize: 12, color: "#9A7B5C" }}>
-                  Screen Credit: Makeup by Shila Kashyap
+                  <div
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: 16,
+                      fontWeight: 700,
+                      color: "#E8C99A",
+                      marginBottom: 4,
+                    }}
+                  >
+                    {collab.title}
+                  </div>
+                  <div style={{ fontSize: 12, color: "#9A7B5C" }}>
+                    {collab.sub}
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -424,7 +573,7 @@ export default function CelebritySection() {
                 "0 0 30px rgba(196,149,106,0.5), 0 0 60px rgba(196,149,106,0.2)",
             }}
           >
-            ✦ FROM JODHPUR TO BOLLYWOOD ✦
+            \u2726 FROM JODHPUR TO BOLLYWOOD \u2726
           </div>
         </div>
 

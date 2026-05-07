@@ -17,9 +17,9 @@ export const IMAGES = {
   facePainting: "/assets/images/work4.jpeg",
   tseries: {
     dhoraMathJhupadi: "/assets/images/work11.jpeg",
-    chitarJyo: "/assets/images/work12.jpeg",
+    chitarJyo: "/assets/images/chitar-jyo.jpeg",
     saajan: "/assets/images/work13.jpeg",
-    italPital: "/assets/images/work14.jpeg",
+    italPital: "/assets/images/ital-pital.jpeg",
   },
   movie: {
     bmVyas: "/assets/images/work15.jpeg",

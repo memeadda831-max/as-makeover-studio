@@ -1717,6 +1717,9 @@ video {
 .text-sidebar-foreground {
   color: oklch(var(--sidebar-foreground));
 }
+.underline {
+  text-decoration-line: underline;
+}
 .underline-offset-4 {
   text-underline-offset: 4px;
 }
@@ -1811,6 +1814,14 @@ video {
 }
 .blur {
   --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.invert {
+  --tw-invert: invert(100%);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.sepia {
+  --tw-sepia: sepia(100%);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .filter {
@@ -2031,6 +2042,19 @@ video {
   src: url("/assets/fonts/Satoshi.woff2") format("woff2");
   font-weight: 300 700;
   font-display: swap;
+}
+
+@media (max-width: 767px) {
+  canvas {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .hero-canvas-wrapper {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+  }
 }
 
 .selection\:bg-primary *::-moz-selection {

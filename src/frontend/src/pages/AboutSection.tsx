@@ -131,39 +131,97 @@ export default function AboutSection() {
               </div>
             </div>
 
-            {/* Certificate photo */}
+            {/* Certificate photo — premium card */}
             <div
               style={{
-                borderRadius: 16,
+                position: "relative",
+                borderRadius: 18,
                 overflow: "hidden",
-                boxShadow: "0 8px 32px rgba(139,94,60,0.2)",
-                border: "2px solid rgba(196,149,106,0.25)",
+                boxShadow:
+                  "0 12px 48px rgba(139,94,60,0.3), 0 0 30px rgba(196,149,106,0.15), inset 0 0 0 2px rgba(196,149,106,0.5)",
+                border: "2px solid rgba(232,201,154,0.6)",
                 marginBottom: 20,
+                background: "#2A1B0F",
               }}
             >
+              {/* Golden shimmer top accent */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 3,
+                  background:
+                    "linear-gradient(90deg, transparent, #C4956A, #E8C99A, #C4956A, transparent)",
+                  zIndex: 2,
+                  boxShadow: "0 0 12px rgba(196,149,106,0.8)",
+                }}
+              />
               <img
                 src={IMAGES.certificate}
-                alt="Bombay School Certificate"
+                alt="Bombay School of Makeup & Hair Certificate"
                 style={{
                   width: "100%",
-                  height: 200,
+                  height: 220,
                   objectFit: "cover",
+                  objectPosition: "center top",
                   display: "block",
                 }}
               />
+              {/* Certified badge overlay */}
               <div
                 style={{
-                  padding: "12px 16px",
-                  background: "rgba(255,248,240,0.9)",
-                  fontSize: 12,
-                  fontWeight: 700,
-                  color: "#8B5E3C",
-                  letterSpacing: "0.08em",
+                  position: "absolute",
+                  top: 14,
+                  right: 12,
+                  background:
+                    "linear-gradient(135deg, rgba(196,149,106,0.95), rgba(139,94,60,0.95))",
+                  color: "#FFF8F0",
+                  padding: "5px 12px",
+                  borderRadius: 8,
+                  fontSize: 10,
+                  fontWeight: 900,
+                  letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  textAlign: "center",
+                  zIndex: 3,
+                  boxShadow: "0 2px 12px rgba(196,149,106,0.6)",
+                  border: "1px solid rgba(232,201,154,0.5)",
                 }}
               >
-                🎓 Bombay School of Make-up & Hair — Official Certificate
+                ✓ Certified Artist
+              </div>
+              <div
+                style={{
+                  padding: "14px 18px",
+                  background: "linear-gradient(135deg, #3D2B1F, #2A1B0F)",
+                  borderTop: "1px solid rgba(196,149,106,0.3)",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: "#C4956A",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    textAlign: "center",
+                    textShadow: "0 0 12px rgba(196,149,106,0.4)",
+                  }}
+                >
+                  🎓 Bombay School of Make-up & Hair
+                </div>
+                <div
+                  style={{
+                    fontSize: 11,
+                    color: "#9A7B5C",
+                    textAlign: "center",
+                    marginTop: 4,
+                    letterSpacing: "0.06em",
+                  }}
+                >
+                  Official Certificate — Advance Prosthetic Artistry
+                </div>
               </div>
             </div>
 

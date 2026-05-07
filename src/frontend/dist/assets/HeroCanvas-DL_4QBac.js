@@ -1,4 +1,4 @@
-import { r as reactExports, g as getDefaultExportFromCjs, R as React$2, j as jsxRuntimeExports } from "./index-CdD90YzK.js";
+import { r as reactExports, g as getDefaultExportFromCjs, R as React$2, j as jsxRuntimeExports } from "./index-BAPqUCDd.js";
 function _extends() {
   return _extends = Object.assign ? Object.assign.bind() : function(n) {
     for (var e = 1; e < arguments.length; e++) {
@@ -52388,10 +52388,10 @@ const OrbitControls2 = /* @__PURE__ */ reactExports.forwardRef(({
     enableDamping
   }, restProps));
 });
-function Particles() {
+function Particles({ isMobile }) {
   const meshRef = reactExports.useRef(null);
   const [positions, colors] = reactExports.useMemo(() => {
-    const count = 200;
+    const count = isMobile ? 100 : 200;
     const pos = new Float32Array(count * 3);
     const col = new Float32Array(count * 3);
     const palette = [
@@ -52400,17 +52400,18 @@ function Particles() {
       [0.906, 0.847, 0.718],
       [0.545, 0.369, 0.235]
     ];
+    const spread = isMobile ? 12 : 20;
     for (let i2 = 0; i2 < count; i2++) {
-      pos[i2 * 3] = (Math.random() - 0.5) * 20;
-      pos[i2 * 3 + 1] = (Math.random() - 0.5) * 20;
-      pos[i2 * 3 + 2] = (Math.random() - 0.5) * 12;
+      pos[i2 * 3] = (Math.random() - 0.5) * spread;
+      pos[i2 * 3 + 1] = (Math.random() - 0.5) * spread;
+      pos[i2 * 3 + 2] = (Math.random() - 0.5) * (isMobile ? 8 : 12);
       const c2 = palette[Math.floor(Math.random() * palette.length)];
       col[i2 * 3] = c2[0];
       col[i2 * 3 + 1] = c2[1];
       col[i2 * 3 + 2] = c2[2];
     }
     return [pos, col];
-  }, []);
+  }, [isMobile]);
   useFrame(({ clock }) => {
     if (!meshRef.current) return;
     const t = clock.getElapsedTime();
@@ -52425,10 +52426,10 @@ function Particles() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "pointsMaterial",
       {
-        size: 0.06,
+        size: isMobile ? 0.1 : 0.06,
         vertexColors: true,
         transparent: true,
-        opacity: 0.7,
+        opacity: isMobile ? 0.9 : 0.7,
         sizeAttenuation: true
       }
     )
@@ -52438,9 +52439,11 @@ function FloatingShape({
   position,
   shape,
   speed = 1,
-  wireframe
+  wireframe,
+  isMobile
 }) {
   const meshRef = reactExports.useRef(null);
+  const scale = isMobile ? 1.5 : 1;
   useFrame(({ clock }) => {
     if (!meshRef.current) return;
     const t = clock.getElapsedTime() * speed;
@@ -52448,7 +52451,7 @@ function FloatingShape({
     meshRef.current.rotation.y = t * 0.6;
     meshRef.current.position.y = position[1] + Math.sin(t * 0.5) * 0.3;
   });
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("mesh", { ref: meshRef, position, children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("mesh", { ref: meshRef, position, scale, children: [
     shape === "torus" && /* @__PURE__ */ jsxRuntimeExports.jsx("torusGeometry", { args: [0.5, 0.18, 16, 40] }),
     shape === "icosahedron" && /* @__PURE__ */ jsxRuntimeExports.jsx("icosahedronGeometry", { args: [0.45, 0] }),
     shape === "octahedron" && /* @__PURE__ */ jsxRuntimeExports.jsx("octahedronGeometry", { args: [0.5, 0] }),
@@ -52458,7 +52461,7 @@ function FloatingShape({
       {
         color: new Color("#C4956A"),
         transparent: true,
-        opacity: 0.65,
+        opacity: isMobile ? 0.85 : 0.65,
         roughness: 0.3,
         metalness: 0.6,
         wireframe
@@ -52466,8 +52469,15 @@ function FloatingShape({
     )
   ] });
 }
-function Scene2() {
-  const shapes = [
+function Scene2({ isMobile }) {
+  const shapes = isMobile ? [
+    { position: [-2, 1.5, -1], shape: "torus", speed: 0.5 },
+    { position: [2.5, -1, -2], shape: "icosahedron", speed: 0.7 },
+    { position: [-1.5, -2, -1], shape: "octahedron", speed: 0.4 },
+    { position: [2, 2, -2], shape: "dodecahedron", speed: 0.6 },
+    { position: [-3, 0, -3], shape: "torus", speed: 0.3 },
+    { position: [0, -3, -2], shape: "icosahedron", speed: 0.8 }
+  ] : [
     { position: [-4, 2, -2], shape: "torus", speed: 0.5 },
     { position: [4, -1, -3], shape: "icosahedron", speed: 0.7 },
     { position: [-2, -3, -1], shape: "octahedron", speed: 0.4 },
@@ -52478,13 +52488,19 @@ function Scene2() {
     { position: [-3, 4, -6], shape: "dodecahedron", speed: 0.45 }
   ];
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("fog", { attach: "fog", args: ["#F5EDE0", 8, 25] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("ambientLight", { intensity: 0.4, color: "#E8D5B7" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "fog",
+      {
+        attach: "fog",
+        args: ["#F5EDE0", isMobile ? 6 : 8, isMobile ? 18 : 25]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("ambientLight", { intensity: isMobile ? 0.7 : 0.4, color: "#E8D5B7" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "directionalLight",
       {
         position: [5, 5, 5],
-        intensity: 1.2,
+        intensity: isMobile ? 1.8 : 1.2,
         color: "#C4956A"
       }
     ),
@@ -52492,18 +52508,19 @@ function Scene2() {
       "directionalLight",
       {
         position: [-5, -3, -5],
-        intensity: 0.5,
+        intensity: isMobile ? 0.8 : 0.5,
         color: "#D4A574"
       }
     ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Particles, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Particles, { isMobile }),
     shapes.map((s, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
       FloatingShape,
       {
         position: s.position,
         shape: s.shape,
         speed: s.speed,
-        wireframe: idx % 2 === 0
+        wireframe: idx % 2 === 0,
+        isMobile
       },
       `${s.shape}-${s.position[0]}-${s.position[1]}`
     )),
@@ -52511,13 +52528,24 @@ function Scene2() {
   ] });
 }
 function HeroCanvas() {
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  const cameraZ = isMobile ? 4.5 : 5;
+  const fov2 = isMobile ? 85 : 75;
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     Canvas,
     {
-      camera: { position: [0, 0, 5], fov: 75 },
-      style: { position: "absolute", inset: 0 },
-      gl: { antialias: true, alpha: true },
-      children: /* @__PURE__ */ jsxRuntimeExports.jsx(Scene2, {})
+      camera: { position: [0, 0, cameraZ], fov: fov2 },
+      style: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        display: "block"
+      },
+      gl: { antialias: !isMobile, alpha: true, powerPreference: "default" },
+      dpr: isMobile ? [1, 1.5] : [1, 2],
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(Scene2, { isMobile })
     }
   );
 }

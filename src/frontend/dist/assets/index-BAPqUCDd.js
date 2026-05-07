@@ -18420,9 +18420,9 @@ const IMAGES = {
   facePainting: "/assets/images/work4.jpeg",
   tseries: {
     dhoraMathJhupadi: "/assets/images/work11.jpeg",
-    chitarJyo: "/assets/images/work12.jpeg",
+    chitarJyo: "/assets/images/chitar-jyo.jpeg",
     saajan: "/assets/images/work13.jpeg",
-    italPital: "/assets/images/work14.jpeg"
+    italPital: "/assets/images/ital-pital.jpeg"
   },
   movie: {
     bmVyas: "/assets/images/work15.jpeg",
@@ -18590,7 +18590,7 @@ function FloatingButtons() {
     ] })
   ] });
 }
-const SERVICES = [
+const SERVICES$1 = [
   "Bridal Makeup",
   "SFX & Prosthetic",
   "Airbrush Makeup",
@@ -18735,7 +18735,7 @@ function Footer() {
                       flexDirection: "column",
                       gap: 10
                     },
-                    children: SERVICES.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    children: SERVICES$1.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "li",
                       {
                         style: {
@@ -18914,21 +18914,30 @@ const NAV_LINKS = [
   { label: "Portfolio", href: "#portfolio" },
   { label: "Celebrity", href: "#celebrity" },
   { label: "About", href: "#about" },
+  { label: "Book Now", href: "#appointment" },
   { label: "Contact", href: "#contact" }
 ];
 function Navbar() {
   const [scrolled, setScrolled] = reactExports.useState(false);
   const [menuOpen, setMenuOpen] = reactExports.useState(false);
+  const [isMobile, setIsMobile] = reactExports.useState(
+    typeof window !== "undefined" ? window.innerWidth < 768 : false
+  );
   reactExports.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
+    const onResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
-  const handleNavClick = (e, href) => {
-    e.preventDefault();
+  const isGlassy = isMobile || scrolled;
+  const scrollTo = (id2) => {
+    var _a2;
     setMenuOpen(false);
-    const target = document.querySelector(href);
-    target == null ? void 0 : target.scrollIntoView({ behavior: "smooth" });
+    (_a2 = document.querySelector(id2)) == null ? void 0 : _a2.scrollIntoView({ behavior: "smooth" });
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -18943,11 +18952,11 @@ function Navbar() {
           zIndex: 1e3,
           height: 70,
           transition: "background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease",
-          background: scrolled ? "rgba(255,248,240,0.88)" : "transparent",
-          backdropFilter: scrolled ? "blur(20px) saturate(1.4)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(20px) saturate(1.4)" : "none",
-          boxShadow: scrolled ? "0 2px 24px rgba(139,94,60,0.12)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(196,149,106,0.18)" : "none"
+          background: isGlassy ? "rgba(255,248,240,0.92)" : "transparent",
+          backdropFilter: isGlassy ? "blur(20px) saturate(1.5)" : "none",
+          WebkitBackdropFilter: isGlassy ? "blur(20px) saturate(1.5)" : "none",
+          boxShadow: isGlassy ? "0 2px 24px rgba(139,94,60,0.14), 0 1px 0 rgba(196,149,106,0.18)" : "none",
+          borderBottom: isGlassy ? "1px solid rgba(196,149,106,0.22)" : "none"
         },
         children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "div",
@@ -18966,24 +18975,21 @@ function Navbar() {
                 "button",
                 {
                   type: "button",
-                  onClick: (e) => {
-                    e.preventDefault();
-                    handleNavClick(
-                      e,
-                      "#home"
-                    );
-                  },
+                  onClick: () => scrollTo("#home"),
                   "data-ocid": "navbar.logo_link",
                   style: {
                     fontFamily: "var(--font-display), serif",
-                    fontSize: 24,
+                    fontSize: 22,
                     fontWeight: 700,
                     color: "#3D2B1F",
-                    textDecoration: "none",
                     letterSpacing: "0.04em",
-                    textShadow: "0 0 20px rgba(196,149,106,0.5)"
+                    textShadow: "0 0 20px rgba(196,149,106,0.5)",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0
                   },
-                  children: "✦ AS Makeover"
+                  children: "\\u2726 AS Makeover"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -18996,8 +19002,11 @@ function Navbar() {
                       "a",
                       {
                         href: link.href,
-                        onClick: (e) => handleNavClick(e, link.href),
-                        "data-ocid": `navbar.${link.label.toLowerCase()}_link`,
+                        onClick: (e) => {
+                          e.preventDefault();
+                          scrollTo(link.href);
+                        },
+                        "data-ocid": `navbar.${link.label.toLowerCase().replace(/ /g, "_")}_link`,
                         style: {
                           padding: "8px 16px",
                           color: "#3D2B1F",
@@ -19023,33 +19032,35 @@ function Navbar() {
                       link.label
                     )),
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      "a",
+                      "button",
                       {
-                        href: `tel:${CONTACT.phone}`,
-                        "data-ocid": "navbar.book_button",
+                        type: "button",
+                        "data-ocid": "navbar.book_cta_button",
+                        onClick: () => scrollTo("#appointment"),
                         style: {
                           marginLeft: 8,
                           padding: "10px 22px",
                           background: "linear-gradient(135deg, #C4956A 0%, #8B5E3C 100%)",
                           color: "#FFF8F0",
-                          textDecoration: "none",
                           fontWeight: 700,
                           fontSize: 13,
                           letterSpacing: "0.08em",
                           textTransform: "uppercase",
                           borderRadius: 50,
-                          boxShadow: "0 4px 16px rgba(196,149,106,0.4)",
-                          transition: "all 0.25s ease"
+                          boxShadow: "0 4px 16px rgba(196,149,106,0.4), 0 0 20px rgba(196,149,106,0.15)",
+                          transition: "all 0.25s ease",
+                          border: "1px solid rgba(232,201,154,0.3)",
+                          cursor: "pointer"
                         },
                         onMouseEnter: (e) => {
-                          e.currentTarget.style.boxShadow = "0 6px 24px rgba(196,149,106,0.6)";
-                          e.currentTarget.style.transform = "translateY(-1px)";
+                          e.currentTarget.style.boxShadow = "0 6px 24px rgba(196,149,106,0.6), 0 0 30px rgba(196,149,106,0.2)";
+                          e.currentTarget.style.transform = "translateY(-2px)";
                         },
                         onMouseLeave: (e) => {
-                          e.currentTarget.style.boxShadow = "0 4px 16px rgba(196,149,106,0.4)";
+                          e.currentTarget.style.boxShadow = "0 4px 16px rgba(196,149,106,0.4), 0 0 20px rgba(196,149,106,0.15)";
                           e.currentTarget.style.transform = "translateY(0)";
                         },
-                        children: "Book Now"
+                        children: "\\u2726 Book Now"
                       }
                     )
                   ]
@@ -19063,22 +19074,25 @@ function Navbar() {
                   "data-ocid": "navbar.hamburger_button",
                   onClick: () => setMenuOpen(!menuOpen),
                   style: {
-                    background: "none",
-                    border: "none",
+                    background: menuOpen ? "rgba(196,149,106,0.15)" : "rgba(255,248,240,0.6)",
+                    border: "1.5px solid rgba(196,149,106,0.35)",
+                    borderRadius: 10,
                     cursor: "pointer",
-                    padding: 8,
-                    color: "#3D2B1F"
+                    padding: "7px 9px",
+                    color: "#3D2B1F",
+                    backdropFilter: "blur(8px)",
+                    transition: "all 0.2s ease"
                   },
                   "aria-label": "Toggle menu",
                   children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "svg",
                     {
-                      width: "24",
-                      height: "24",
+                      width: "22",
+                      height: "22",
                       viewBox: "0 0 24 24",
                       fill: "none",
-                      stroke: "currentColor",
-                      strokeWidth: "2",
+                      stroke: "#3D2B1F",
+                      strokeWidth: "2.5",
                       "aria-hidden": "true",
                       role: "presentation",
                       children: menuOpen ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -19108,45 +19122,71 @@ function Navbar() {
           left: 0,
           right: 0,
           zIndex: 999,
-          background: "rgba(255,248,240,0.96)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(196,149,106,0.2)",
-          padding: "16px 24px 24px",
+          background: "rgba(255,248,240,0.97)",
+          backdropFilter: "blur(24px) saturate(1.6)",
+          WebkitBackdropFilter: "blur(24px) saturate(1.6)",
+          borderBottom: "1px solid rgba(196,149,106,0.25)",
+          padding: "12px 20px 20px",
           display: "flex",
           flexDirection: "column",
-          gap: 4,
-          boxShadow: "0 12px 40px rgba(139,94,60,0.12)"
+          gap: 2,
+          boxShadow: "0 16px 48px rgba(139,94,60,0.16)"
         },
         children: [
           NAV_LINKS.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx(
             "a",
             {
               href: link.href,
-              onClick: (e) => handleNavClick(e, link.href),
+              onClick: (e) => {
+                e.preventDefault();
+                scrollTo(link.href);
+              },
               style: {
-                padding: "14px 16px",
+                padding: "13px 16px",
                 color: "#3D2B1F",
                 textDecoration: "none",
-                fontWeight: 500,
-                fontSize: 16,
-                borderRadius: 8,
-                borderBottom: "1px solid rgba(196,149,106,0.1)",
-                letterSpacing: "0.04em"
+                fontWeight: 600,
+                fontSize: 15,
+                borderRadius: 10,
+                borderBottom: "1px solid rgba(196,149,106,0.12)",
+                letterSpacing: "0.04em",
+                textTransform: "uppercase"
               },
               children: link.label
             },
             link.label
           )),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              type: "button",
+              onClick: () => scrollTo("#appointment"),
+              style: {
+                marginTop: 10,
+                padding: "14px 16px",
+                background: "linear-gradient(135deg, #C4956A, #8B5E3C)",
+                color: "#FFF8F0",
+                fontWeight: 700,
+                fontSize: 14,
+                borderRadius: 12,
+                letterSpacing: "0.08em",
+                boxShadow: "0 4px 20px rgba(196,149,106,0.4)",
+                border: "none",
+                cursor: "pointer",
+                width: "100%"
+              },
+              children: "\\u2726 Book Appointment"
+            }
+          ),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "a",
             {
               href: `tel:${CONTACT.phone}`,
               style: {
-                marginTop: 8,
                 padding: "14px 16px",
-                background: "linear-gradient(135deg, #C4956A, #8B5E3C)",
-                color: "#FFF8F0",
+                background: "rgba(196,149,106,0.08)",
+                border: "1px solid rgba(196,149,106,0.25)",
+                color: "#C4956A",
                 textDecoration: "none",
                 fontWeight: 700,
                 fontSize: 14,
@@ -19155,7 +19195,7 @@ function Navbar() {
                 letterSpacing: "0.08em"
               },
               children: [
-                "📞 Call: ",
+                "\\uD83D\\uDCDE Call: ",
                 CONTACT.phone
               ]
             }
@@ -19319,22 +19359,40 @@ function AboutSection() {
                   "div",
                   {
                     style: {
-                      borderRadius: 16,
+                      position: "relative",
+                      borderRadius: 18,
                       overflow: "hidden",
-                      boxShadow: "0 8px 32px rgba(139,94,60,0.2)",
-                      border: "2px solid rgba(196,149,106,0.25)",
-                      marginBottom: 20
+                      boxShadow: "0 12px 48px rgba(139,94,60,0.3), 0 0 30px rgba(196,149,106,0.15), inset 0 0 0 2px rgba(196,149,106,0.5)",
+                      border: "2px solid rgba(232,201,154,0.6)",
+                      marginBottom: 20,
+                      background: "#2A1B0F"
                     },
                     children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "div",
+                        {
+                          style: {
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            height: 3,
+                            background: "linear-gradient(90deg, transparent, #C4956A, #E8C99A, #C4956A, transparent)",
+                            zIndex: 2,
+                            boxShadow: "0 0 12px rgba(196,149,106,0.8)"
+                          }
+                        }
+                      ),
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
                         "img",
                         {
                           src: IMAGES.certificate,
-                          alt: "Bombay School Certificate",
+                          alt: "Bombay School of Makeup & Hair Certificate",
                           style: {
                             width: "100%",
-                            height: 200,
+                            height: 220,
                             objectFit: "cover",
+                            objectPosition: "center top",
                             display: "block"
                           }
                         }
@@ -19343,16 +19401,62 @@ function AboutSection() {
                         "div",
                         {
                           style: {
-                            padding: "12px 16px",
-                            background: "rgba(255,248,240,0.9)",
-                            fontSize: 12,
-                            fontWeight: 700,
-                            color: "#8B5E3C",
-                            letterSpacing: "0.08em",
+                            position: "absolute",
+                            top: 14,
+                            right: 12,
+                            background: "linear-gradient(135deg, rgba(196,149,106,0.95), rgba(139,94,60,0.95))",
+                            color: "#FFF8F0",
+                            padding: "5px 12px",
+                            borderRadius: 8,
+                            fontSize: 10,
+                            fontWeight: 900,
+                            letterSpacing: "0.1em",
                             textTransform: "uppercase",
-                            textAlign: "center"
+                            zIndex: 3,
+                            boxShadow: "0 2px 12px rgba(196,149,106,0.6)",
+                            border: "1px solid rgba(232,201,154,0.5)"
                           },
-                          children: "🎓 Bombay School of Make-up & Hair — Official Certificate"
+                          children: "✓ Certified Artist"
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "div",
+                        {
+                          style: {
+                            padding: "14px 18px",
+                            background: "linear-gradient(135deg, #3D2B1F, #2A1B0F)",
+                            borderTop: "1px solid rgba(196,149,106,0.3)"
+                          },
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "div",
+                              {
+                                style: {
+                                  fontSize: 12,
+                                  fontWeight: 700,
+                                  color: "#C4956A",
+                                  letterSpacing: "0.08em",
+                                  textTransform: "uppercase",
+                                  textAlign: "center",
+                                  textShadow: "0 0 12px rgba(196,149,106,0.4)"
+                                },
+                                children: "🎓 Bombay School of Make-up & Hair"
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "div",
+                              {
+                                style: {
+                                  fontSize: 11,
+                                  color: "#9A7B5C",
+                                  textAlign: "center",
+                                  marginTop: 4,
+                                  letterSpacing: "0.06em"
+                                },
+                                children: "Official Certificate — Advance Prosthetic Artistry"
+                              }
+                            )
+                          ]
                         }
                       )
                     ]
@@ -19644,30 +19748,729 @@ function AboutSection() {
     }
   );
 }
+const SERVICES = [
+  "Bridal Makeup",
+  "SFX / Prosthetic Makeup",
+  "Airbrush Makeup",
+  "Celebrity HD Makeup",
+  "Editorial Makeup",
+  "Face Painting",
+  "Film / Movie Makeup",
+  "Pre-Wedding Shoot Makeup"
+];
+const FLOATING_ORBS = [
+  { top: "8%", left: "4%", size: 320, color: "rgba(196,149,106,0.08)" },
+  { top: "55%", right: "3%", size: 260, color: "rgba(139,94,60,0.06)" },
+  { bottom: "10%", left: "35%", size: 200, color: "rgba(232,201,154,0.07)" }
+];
+const EMPTY = {
+  name: "",
+  phone: "",
+  email: "",
+  service: "",
+  date: "",
+  message: ""
+};
+const inputStyle = {
+  width: "100%",
+  padding: "14px 18px",
+  background: "rgba(255,248,240,0.06)",
+  border: "1px solid rgba(196,149,106,0.28)",
+  borderRadius: 12,
+  color: "#FFF8F0",
+  fontSize: 15,
+  fontFamily: "var(--font-body)",
+  outline: "none",
+  transition: "border-color 0.25s ease, box-shadow 0.25s ease",
+  boxSizing: "border-box"
+};
+const labelStyle = {
+  display: "block",
+  fontSize: 12,
+  fontWeight: 700,
+  letterSpacing: "0.1em",
+  textTransform: "uppercase",
+  color: "#C4956A",
+  marginBottom: 8
+};
+function AppointmentSection() {
+  const [form, setForm] = reactExports.useState(EMPTY);
+  const [submitted, setSubmitted] = reactExports.useState(false);
+  const [focused, setFocused] = reactExports.useState("");
+  const handleChange = (field, value) => setForm((f) => ({ ...f, [field]: value }));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setForm(EMPTY);
+    setTimeout(() => setSubmitted(false), 6e3);
+  };
+  const getFocusStyle = (field) => focused === field ? {
+    ...inputStyle,
+    borderColor: "#C4956A",
+    boxShadow: "0 0 0 3px rgba(196,149,106,0.18), 0 4px 20px rgba(196,149,106,0.12)",
+    background: "rgba(255,248,240,0.1)"
+  } : inputStyle;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "section",
+    {
+      id: "appointment",
+      "data-ocid": "appointment.section",
+      style: {
+        background: "linear-gradient(160deg, #1A0F09 0%, #2A1F17 50%, #3D2B1F 100%)",
+        padding: "110px 0 120px",
+        position: "relative",
+        overflow: "hidden"
+      },
+      children: [
+        FLOATING_ORBS.map((orb, orbIdx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              ...{
+                top: orb.top,
+                left: orb.left,
+                right: orb.right,
+                bottom: orb.bottom
+              },
+              width: orb.size,
+              height: orb.size,
+              borderRadius: "50%",
+              background: `radial-gradient(circle, ${orb.color} 0%, transparent 70%)`,
+              filter: "blur(50px)",
+              pointerEvents: "none",
+              animation: `floatOrb${orbIdx} ${6 + orbIdx * 2}s ease-in-out infinite alternate`
+            }
+          },
+          orb.color
+        )),
+        Array.from({ length: 12 }, (_, i) => i).map((i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              width: i % 3 === 0 ? 4 : 2,
+              height: i % 3 === 0 ? 4 : 2,
+              borderRadius: "50%",
+              background: `rgba(196,149,106,${0.2 + i % 4 * 0.1})`,
+              top: `${10 + i * 7}%`,
+              left: `${5 + i * 17 % 90}%`,
+              animation: `particleDrift ${4 + i * 0.5}s ease-in-out infinite alternate`,
+              pointerEvents: "none"
+            }
+          },
+          `particle-${i}`
+        )),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            style: {
+              maxWidth: 1100,
+              margin: "0 auto",
+              padding: "0 24px",
+              position: "relative",
+              zIndex: 1
+            },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { textAlign: "center", marginBottom: 64 }, children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "div",
+                  {
+                    style: {
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 10,
+                      padding: "10px 28px",
+                      background: "rgba(196,149,106,0.1)",
+                      border: "1px solid rgba(196,149,106,0.3)",
+                      borderRadius: 50,
+                      marginBottom: 24,
+                      backdropFilter: "blur(8px)"
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 16 }, children: "💄" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "span",
+                        {
+                          style: {
+                            color: "#C4956A",
+                            fontWeight: 800,
+                            fontSize: 12,
+                            letterSpacing: "0.16em",
+                            textTransform: "uppercase"
+                          },
+                          children: "Schedule Your Session"
+                        }
+                      )
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "h2",
+                  {
+                    style: {
+                      fontFamily: "var(--font-display)",
+                      fontSize: "clamp(36px, 5vw, 58px)",
+                      fontWeight: 700,
+                      color: "#FFF8F0",
+                      lineHeight: 1.1,
+                      marginBottom: 16,
+                      textShadow: "0 0 40px rgba(196,149,106,0.3)"
+                    },
+                    children: "Book Your Appointment"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    style: {
+                      width: 100,
+                      height: 3,
+                      background: "linear-gradient(90deg, transparent, #C4956A, #E8C99A, #C4956A, transparent)",
+                      borderRadius: 4,
+                      margin: "0 auto 20px",
+                      boxShadow: "0 0 12px rgba(196,149,106,0.5)"
+                    }
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "p",
+                  {
+                    style: {
+                      fontSize: 17,
+                      color: "#C4956A",
+                      letterSpacing: "0.04em",
+                      fontStyle: "italic",
+                      fontFamily: "var(--font-display)"
+                    },
+                    children: "✦ Your dream look is just one step away ✦"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  style: {
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                    gap: 48,
+                    alignItems: "start"
+                  },
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "div",
+                        {
+                          style: {
+                            background: "rgba(255,248,240,0.04)",
+                            border: "1px solid rgba(196,149,106,0.2)",
+                            borderRadius: 24,
+                            padding: "36px 32px",
+                            backdropFilter: "blur(12px)",
+                            marginBottom: 24
+                          },
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "h3",
+                              {
+                                style: {
+                                  fontFamily: "var(--font-display)",
+                                  fontSize: 22,
+                                  fontWeight: 700,
+                                  color: "#E8C99A",
+                                  marginBottom: 24
+                                },
+                                children: "Why Book With Us?"
+                              }
+                            ),
+                            [
+                              {
+                                icon: "✨",
+                                text: "Personalised consultation before every session"
+                              },
+                              {
+                                icon: "🎨",
+                                text: "Premium products — Airbrush, HD, and SFX grade"
+                              },
+                              {
+                                icon: "⏱️",
+                                text: "Punctual and professional — no delays on your big day"
+                              },
+                              {
+                                icon: "📸",
+                                text: "Looks crafted for camera, HD, and natural lighting"
+                              },
+                              {
+                                icon: "🏆",
+                                text: "Bombay School certified — industry-grade expertise"
+                              },
+                              {
+                                icon: "💛",
+                                text: "100% satisfaction guarantee with 500+ happy clients"
+                              }
+                            ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                              "div",
+                              {
+                                style: {
+                                  display: "flex",
+                                  alignItems: "flex-start",
+                                  gap: 14,
+                                  marginBottom: 16,
+                                  fontSize: 14,
+                                  color: "#C4956A",
+                                  lineHeight: 1.6
+                                },
+                                children: [
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 18, flexShrink: 0, marginTop: 1 }, children: item.icon }),
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { color: "#D4B896" }, children: item.text })
+                                ]
+                              },
+                              item.text
+                            ))
+                          ]
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "div",
+                        {
+                          style: {
+                            background: "linear-gradient(135deg, rgba(196,149,106,0.15), rgba(139,94,60,0.1))",
+                            border: "1px solid rgba(196,149,106,0.3)",
+                            borderRadius: 20,
+                            padding: "24px 28px",
+                            backdropFilter: "blur(8px)"
+                          },
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "div",
+                              {
+                                style: {
+                                  fontSize: 12,
+                                  fontWeight: 700,
+                                  color: "#C4956A",
+                                  letterSpacing: "0.12em",
+                                  textTransform: "uppercase",
+                                  marginBottom: 18
+                                },
+                                children: "Studio Details"
+                              }
+                            ),
+                            [
+                              { icon: "📱", label: "Call / WhatsApp", value: "09610659366" },
+                              {
+                                icon: "📍",
+                                label: "Location",
+                                value: "Jaloria Bas, Nagori Gate, Jodhpur, Rajasthan"
+                              },
+                              {
+                                icon: "🕐",
+                                label: "Hours",
+                                value: "Mon–Sun · 8:00 AM – 8:00 PM"
+                              }
+                            ].map((info) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                              "div",
+                              {
+                                style: { display: "flex", gap: 12, marginBottom: 14 },
+                                children: [
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 18, flexShrink: 0 }, children: info.icon }),
+                                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                      "div",
+                                      {
+                                        style: {
+                                          fontSize: 11,
+                                          color: "#9A7B5C",
+                                          fontWeight: 600,
+                                          letterSpacing: "0.08em",
+                                          textTransform: "uppercase",
+                                          marginBottom: 2
+                                        },
+                                        children: info.label
+                                      }
+                                    ),
+                                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                      "div",
+                                      {
+                                        style: {
+                                          fontSize: 14,
+                                          color: "#E8C99A",
+                                          fontWeight: 500
+                                        },
+                                        children: info.value
+                                      }
+                                    )
+                                  ] })
+                                ]
+                              },
+                              info.label
+                            ))
+                          ]
+                        }
+                      )
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                      submitted && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "div",
+                        {
+                          "data-ocid": "appointment.success_state",
+                          style: {
+                            background: "linear-gradient(135deg, rgba(196,149,106,0.2), rgba(232,201,154,0.1))",
+                            border: "1px solid rgba(196,149,106,0.5)",
+                            borderRadius: 20,
+                            padding: "28px 32px",
+                            textAlign: "center",
+                            marginBottom: 24,
+                            backdropFilter: "blur(12px)",
+                            boxShadow: "0 8px 40px rgba(196,149,106,0.2), 0 0 60px rgba(196,149,106,0.1)",
+                            animation: "successPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)"
+                          },
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 48, marginBottom: 12 }, children: "✨" }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "div",
+                              {
+                                style: {
+                                  fontFamily: "var(--font-display)",
+                                  fontSize: 22,
+                                  fontWeight: 700,
+                                  color: "#E8C99A",
+                                  marginBottom: 10
+                                },
+                                children: "Booking Request Sent!"
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "div",
+                              {
+                                style: { fontSize: 15, color: "#C4956A", lineHeight: 1.6 },
+                                children: "Thank you! Shila will contact you within 24 hours to confirm your appointment."
+                              }
+                            )
+                          ]
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "form",
+                        {
+                          "data-ocid": "appointment.form",
+                          onSubmit: handleSubmit,
+                          style: {
+                            background: "rgba(255,248,240,0.04)",
+                            border: "1px solid rgba(196,149,106,0.25)",
+                            borderRadius: 24,
+                            padding: "36px 32px",
+                            backdropFilter: "blur(20px)",
+                            boxShadow: "0 8px 60px rgba(0,0,0,0.3), 0 0 40px rgba(196,149,106,0.08), inset 0 1px 0 rgba(255,248,240,0.06)",
+                            position: "relative",
+                            overflow: "hidden"
+                          },
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "div",
+                              {
+                                style: {
+                                  position: "absolute",
+                                  top: 0,
+                                  left: 0,
+                                  right: 0,
+                                  height: 2,
+                                  background: "linear-gradient(90deg, transparent, #C4956A, #E8C99A, #C4956A, transparent)",
+                                  boxShadow: "0 0 12px rgba(196,149,106,0.6)"
+                                }
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "grid", gap: 20 }, children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                                "div",
+                                {
+                                  style: {
+                                    display: "grid",
+                                    gridTemplateColumns: "1fr 1fr",
+                                    gap: 16
+                                  },
+                                  children: [
+                                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                                      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "appt-name", style: labelStyle, children: "Full Name" }),
+                                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                        "input",
+                                        {
+                                          id: "appt-name",
+                                          type: "text",
+                                          required: true,
+                                          placeholder: "Priya Sharma",
+                                          value: form.name,
+                                          "data-ocid": "appointment.name_input",
+                                          onChange: (e) => handleChange("name", e.target.value),
+                                          onFocus: () => setFocused("name"),
+                                          onBlur: () => setFocused(""),
+                                          style: getFocusStyle("name")
+                                        }
+                                      )
+                                    ] }),
+                                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                                      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "appt-phone", style: labelStyle, children: "Phone Number" }),
+                                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                        "input",
+                                        {
+                                          id: "appt-phone",
+                                          type: "tel",
+                                          required: true,
+                                          placeholder: "+91 98765 43210",
+                                          value: form.phone,
+                                          "data-ocid": "appointment.phone_input",
+                                          onChange: (e) => handleChange("phone", e.target.value),
+                                          onFocus: () => setFocused("phone"),
+                                          onBlur: () => setFocused(""),
+                                          style: getFocusStyle("phone")
+                                        }
+                                      )
+                                    ] })
+                                  ]
+                                }
+                              ),
+                              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "appt-email", style: labelStyle, children: "Email Address" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                  "input",
+                                  {
+                                    id: "appt-email",
+                                    type: "email",
+                                    placeholder: "priya@example.com",
+                                    value: form.email,
+                                    "data-ocid": "appointment.email_input",
+                                    onChange: (e) => handleChange("email", e.target.value),
+                                    onFocus: () => setFocused("email"),
+                                    onBlur: () => setFocused(""),
+                                    style: getFocusStyle("email")
+                                  }
+                                )
+                              ] }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "appt-service", style: labelStyle, children: "Service Required" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                                  "select",
+                                  {
+                                    id: "appt-service",
+                                    required: true,
+                                    value: form.service,
+                                    "data-ocid": "appointment.service_select",
+                                    onChange: (e) => handleChange("service", e.target.value),
+                                    onFocus: () => setFocused("service"),
+                                    onBlur: () => setFocused(""),
+                                    style: {
+                                      ...getFocusStyle("service"),
+                                      cursor: "pointer",
+                                      appearance: "none"
+                                    },
+                                    children: [
+                                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                        "option",
+                                        {
+                                          value: "",
+                                          style: { background: "#2A1F17", color: "#9A7B5C" },
+                                          children: "Select a service…"
+                                        }
+                                      ),
+                                      SERVICES.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                        "option",
+                                        {
+                                          value: s,
+                                          style: { background: "#2A1F17", color: "#E8C99A" },
+                                          children: s
+                                        },
+                                        s
+                                      ))
+                                    ]
+                                  }
+                                )
+                              ] }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "appt-date", style: labelStyle, children: "Preferred Date" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                  "input",
+                                  {
+                                    id: "appt-date",
+                                    type: "date",
+                                    value: form.date,
+                                    "data-ocid": "appointment.date_input",
+                                    onChange: (e) => handleChange("date", e.target.value),
+                                    onFocus: () => setFocused("date"),
+                                    onBlur: () => setFocused(""),
+                                    style: getFocusStyle("date"),
+                                    min: (/* @__PURE__ */ new Date()).toISOString().split("T")[0]
+                                  }
+                                )
+                              ] }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "appt-message", style: labelStyle, children: "Special Requirements" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                  "textarea",
+                                  {
+                                    id: "appt-message",
+                                    rows: 4,
+                                    placeholder: "Tell us about your event, inspiration, or any special requirements…",
+                                    value: form.message,
+                                    "data-ocid": "appointment.textarea",
+                                    onChange: (e) => handleChange("message", e.target.value),
+                                    onFocus: () => setFocused("message"),
+                                    onBlur: () => setFocused(""),
+                                    style: {
+                                      ...getFocusStyle("message"),
+                                      resize: "vertical",
+                                      minHeight: 100
+                                    }
+                                  }
+                                )
+                              ] }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                "button",
+                                {
+                                  type: "submit",
+                                  "data-ocid": "appointment.submit_button",
+                                  style: {
+                                    width: "100%",
+                                    padding: "16px 32px",
+                                    background: "linear-gradient(135deg, #C4956A 0%, #8B5E3C 100%)",
+                                    color: "#FFF8F0",
+                                    border: "none",
+                                    borderRadius: 14,
+                                    fontSize: 15,
+                                    fontWeight: 800,
+                                    letterSpacing: "0.1em",
+                                    textTransform: "uppercase",
+                                    cursor: "pointer",
+                                    transition: "all 0.3s cubic-bezier(0.23, 1, 0.32, 1)",
+                                    boxShadow: "0 6px 28px rgba(196,149,106,0.4), 0 0 0 0 rgba(196,149,106,0)",
+                                    fontFamily: "var(--font-body)",
+                                    position: "relative",
+                                    overflow: "hidden"
+                                  },
+                                  onMouseEnter: (e) => {
+                                    const btn = e.currentTarget;
+                                    btn.style.transform = "translateY(-2px) scale(1.01)";
+                                    btn.style.boxShadow = "0 12px 36px rgba(196,149,106,0.5), 0 0 30px rgba(196,149,106,0.2)";
+                                  },
+                                  onMouseLeave: (e) => {
+                                    const btn = e.currentTarget;
+                                    btn.style.transform = "translateY(0) scale(1)";
+                                    btn.style.boxShadow = "0 6px 28px rgba(196,149,106,0.4)";
+                                  },
+                                  children: "✦ Confirm Appointment ✦"
+                                }
+                              )
+                            ] })
+                          ]
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { marginTop: 20, textAlign: "center" }, children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "div",
+                          {
+                            style: {
+                              fontSize: 13,
+                              color: "#9A7B5C",
+                              marginBottom: 12,
+                              letterSpacing: "0.04em"
+                            },
+                            children: "— or book instantly via —"
+                          }
+                        ),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                          "a",
+                          {
+                            href: CONTACT.whatsapp,
+                            target: "_blank",
+                            rel: "noopener noreferrer",
+                            "data-ocid": "appointment.whatsapp_button",
+                            style: {
+                              display: "inline-flex",
+                              alignItems: "center",
+                              gap: 10,
+                              padding: "14px 32px",
+                              background: "linear-gradient(135deg, #25D366, #128C7E)",
+                              color: "#fff",
+                              textDecoration: "none",
+                              fontWeight: 700,
+                              fontSize: 14,
+                              borderRadius: 50,
+                              letterSpacing: "0.06em",
+                              transition: "all 0.3s ease",
+                              boxShadow: "0 6px 24px rgba(37,211,102,0.35)"
+                            },
+                            onMouseEnter: (e) => {
+                              e.currentTarget.style.transform = "translateY(-2px)";
+                              e.currentTarget.style.boxShadow = "0 10px 32px rgba(37,211,102,0.5)";
+                            },
+                            onMouseLeave: (e) => {
+                              e.currentTarget.style.transform = "translateY(0)";
+                              e.currentTarget.style.boxShadow = "0 6px 24px rgba(37,211,102,0.35)";
+                            },
+                            children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                "svg",
+                                {
+                                  width: "20",
+                                  height: "20",
+                                  viewBox: "0 0 24 24",
+                                  fill: "white",
+                                  "aria-hidden": "true",
+                                  role: "presentation",
+                                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" })
+                                }
+                              ),
+                              "Book via WhatsApp"
+                            ]
+                          }
+                        )
+                      ] })
+                    ] })
+                  ]
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
+        @keyframes floatOrb0 { from { transform: translate(0,0) scale(1); } to { transform: translate(20px, -30px) scale(1.05); } }
+        @keyframes floatOrb1 { from { transform: translate(0,0) scale(1); } to { transform: translate(-25px, 20px) scale(0.95); } }
+        @keyframes floatOrb2 { from { transform: translate(0,0) scale(1); } to { transform: translate(15px, 25px) scale(1.08); } }
+        @keyframes particleDrift { from { transform: translateY(0); opacity: 0.4; } to { transform: translateY(-18px); opacity: 1; } }
+        @keyframes successPop { from { opacity: 0; transform: scale(0.9) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        #appt-name::placeholder, #appt-phone::placeholder, #appt-email::placeholder, #appt-date::placeholder, #appt-message::placeholder { color: rgba(154,123,92,0.6); }
+        input[type='date']::-webkit-calendar-picker-indicator { filter: invert(0.7) sepia(1) saturate(2) hue-rotate(5deg); cursor: pointer; }
+      ` })
+      ]
+    }
+  );
+}
 const TSERIES_WORKS = [
   {
     img: IMAGES.tseries.dhoraMathJhupadi,
     title: "Dhora Mathe Jhupadi",
-    subtitle: "Rajasthani T-Series Music Video",
-    views: "10M+ Views"
+    subtitle: "Rajasthani Folk — T-Series",
+    viewCount: 10,
+    featured: false
   },
   {
     img: IMAGES.tseries.chitarJyo,
     title: "Chitar Jyo Ji Mhane",
     subtitle: "T-Series Rajasthani Production",
-    views: "8M+ Views"
+    viewCount: 8,
+    featured: true
   },
   {
     img: IMAGES.tseries.saajan,
     title: "Saajan",
     subtitle: "T-Series Music Video",
-    views: "5M+ Views"
+    viewCount: 5,
+    featured: false
   },
   {
     img: IMAGES.tseries.italPital,
     title: "Ital Pital",
-    subtitle: "Maati Beats T-Series",
-    views: "6M+ Views"
+    subtitle: "Maati Beats — T-Series",
+    viewCount: 6,
+    featured: true
   }
 ];
 const ACHIEVEMENTS = [
@@ -19677,17 +20480,232 @@ const ACHIEVEMENTS = [
     sub: "Multiple music videos"
   },
   { icon: "🎥", label: "Film Credited", sub: "Eight O Clock" },
-  { icon: "⭐", label: "Celebrity Makeup", sub: "Bollywood collaborations" },
+  {
+    icon: "⭐",
+    label: "Celebrity Makeup",
+    sub: "Bollywood collaborations"
+  },
   {
     icon: "🎓",
     label: "Bombay School Alumni",
     sub: "Advance Prosthetic Certified"
   }
 ];
+function useCountUp(target, active) {
+  const [count, setCount] = reactExports.useState(0);
+  reactExports.useEffect(() => {
+    if (!active) return;
+    setCount(0);
+    let current = 0;
+    const step = Math.max(1, Math.ceil(target / 40));
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(current);
+      }
+    }, 40);
+    return () => clearInterval(timer);
+  }, [active, target]);
+  return count;
+}
+function TSeriesCard({
+  work,
+  index: index2,
+  inView
+}) {
+  const count = useCountUp(work.viewCount, inView);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      "data-ocid": `celebrity.tseries_item.${index2 + 1}`,
+      style: {
+        position: "relative",
+        borderRadius: 20,
+        overflow: "hidden",
+        border: work.featured ? "1px solid rgba(196,149,106,0.6)" : "1px solid rgba(196,149,106,0.3)",
+        boxShadow: work.featured ? "0 8px 40px rgba(0,0,0,0.4), 0 0 40px rgba(196,149,106,0.18)" : "0 8px 40px rgba(0,0,0,0.4), 0 0 30px rgba(196,149,106,0.08)",
+        transition: "all 0.4s cubic-bezier(0.23, 1, 0.32, 1)"
+      },
+      onMouseEnter: (e) => {
+        const el = e.currentTarget;
+        el.style.transform = "translateY(-8px) scale(1.02)";
+        el.style.boxShadow = "0 24px 70px rgba(0,0,0,0.5), 0 0 60px rgba(196,149,106,0.25)";
+        el.style.borderColor = "#C4956A";
+        const shimmer = el.querySelector(
+          ".tseries-shimmer"
+        );
+        if (shimmer) shimmer.style.opacity = "1";
+      },
+      onMouseLeave: (e) => {
+        const el = e.currentTarget;
+        el.style.transform = "translateY(0) scale(1)";
+        el.style.boxShadow = work.featured ? "0 8px 40px rgba(0,0,0,0.4), 0 0 40px rgba(196,149,106,0.18)" : "0 8px 40px rgba(0,0,0,0.4), 0 0 30px rgba(196,149,106,0.08)";
+        el.style.borderColor = work.featured ? "rgba(196,149,106,0.6)" : "rgba(196,149,106,0.3)";
+        const shimmer = el.querySelector(
+          ".tseries-shimmer"
+        );
+        if (shimmer) shimmer.style.opacity = "0";
+      },
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { position: "relative" }, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "img",
+            {
+              src: work.img,
+              alt: work.title,
+              style: {
+                width: "100%",
+                height: 280,
+                objectFit: "cover",
+                display: "block"
+              }
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "tseries-shimmer",
+              style: {
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(105deg, transparent 30%, rgba(255,248,240,0.12) 50%, transparent 70%)",
+                opacity: 0,
+                transition: "opacity 0.3s ease",
+                pointerEvents: "none"
+              }
+            }
+          ),
+          work.featured && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              style: {
+                position: "absolute",
+                top: 0,
+                right: 0,
+                background: "linear-gradient(135deg, #C4956A, #E8C99A)",
+                color: "#3D2B1F",
+                fontSize: 9,
+                fontWeight: 900,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                padding: "6px 14px 6px 20px",
+                clipPath: "polygon(12px 0%, 100% 0%, 100% 100%, 0% 100%)",
+                boxShadow: "0 2px 12px rgba(196,149,106,0.5)"
+              },
+              children: "\\u2726 FEATURED"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              style: {
+                position: "absolute",
+                top: 14,
+                left: 14,
+                background: "#FF0000",
+                color: "#fff",
+                padding: "4px 12px",
+                borderRadius: 6,
+                fontSize: 11,
+                fontWeight: 900,
+                letterSpacing: "0.08em",
+                boxShadow: "0 2px 12px rgba(255,0,0,0.4)"
+              },
+              children: "T-SERIES"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            style: { padding: "16px 18px 20px", background: "rgba(26,16,10,0.95)" },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  style: {
+                    fontFamily: "var(--font-display)",
+                    fontSize: 17,
+                    fontWeight: 700,
+                    color: "#E8C99A",
+                    marginBottom: 4
+                  },
+                  children: work.title
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 12, color: "#9A7B5C", marginBottom: 12 }, children: work.subtitle }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  style: {
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    borderTop: "1px solid rgba(196,149,106,0.2)",
+                    paddingTop: 10
+                  },
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "div",
+                      {
+                        style: {
+                          fontSize: 10,
+                          color: "#C4956A",
+                          fontWeight: 800,
+                          letterSpacing: "0.1em",
+                          textTransform: "uppercase"
+                        },
+                        children: "\\u2726 Makeup by Shila Kashyap"
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      "div",
+                      {
+                        style: {
+                          fontSize: 12,
+                          fontWeight: 800,
+                          color: "#E8C99A",
+                          background: "rgba(196,149,106,0.1)",
+                          border: "1px solid rgba(196,149,106,0.3)",
+                          padding: "2px 8px",
+                          borderRadius: 20
+                        },
+                        children: [
+                          inView ? `${count}M+` : "—",
+                          " \\uD83D\\uDC41"
+                        ]
+                      }
+                    )
+                  ]
+                }
+              )
+            ]
+          }
+        )
+      ]
+    }
+  );
+}
 function CelebritySection() {
+  const sectionRef = reactExports.useRef(null);
+  const [inView, setInView] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.15 }
+    );
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "section",
     {
+      ref: sectionRef,
       "data-ocid": "celebrity.section",
       style: {
         background: "linear-gradient(160deg, #3D2B1F 0%, #2A1F17 60%, #1A0F09 100%)",
@@ -19755,7 +20773,7 @@ function CelebritySection() {
                       backdropFilter: "blur(8px)"
                     },
                     children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 18 }, children: "🎦" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 18 }, children: "\\uD83C\\uDFA6" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
                         "span",
                         {
@@ -19813,7 +20831,7 @@ function CelebritySection() {
                       "Makeup by",
                       " ",
                       /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { style: { color: "#E8C99A" }, children: "Shila Kashyap" }),
-                      " — Official Artist for Major Bollywood Music Videos & Films"
+                      " \\u2014 Official Artist for Major Bollywood Music Videos & Films"
                     ]
                   }
                 )
@@ -19825,85 +20843,161 @@ function CelebritySection() {
                     display: "grid",
                     gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
                     gap: 24,
-                    marginBottom: 64
+                    marginBottom: 56
                   },
-                  children: TSERIES_WORKS.map((work, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  children: TSERIES_WORKS.map((work, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    TSeriesCard,
+                    {
+                      work,
+                      index: i,
+                      inView
+                    },
+                    work.title
+                  ))
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  style: {
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 20,
+                    marginBottom: 56
+                  },
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "div",
+                      {
+                        style: {
+                          flex: 1,
+                          height: 1,
+                          background: "linear-gradient(90deg, transparent, rgba(196,149,106,0.4))"
+                        }
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "div",
+                      {
+                        style: {
+                          padding: "8px 20px",
+                          border: "1px solid rgba(196,149,106,0.4)",
+                          borderRadius: 50,
+                          fontSize: 12,
+                          fontWeight: 700,
+                          color: "#C4956A",
+                          letterSpacing: "0.12em",
+                          textTransform: "uppercase",
+                          backdropFilter: "blur(8px)",
+                          background: "rgba(196,149,106,0.05)"
+                        },
+                        children: "\\u2726 Celebrity Collaborations \\u2726"
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "div",
+                      {
+                        style: {
+                          flex: 1,
+                          height: 1,
+                          background: "linear-gradient(90deg, rgba(196,149,106,0.4), transparent)"
+                        }
+                      }
+                    )
+                  ]
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { marginBottom: 72 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  style: {
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                    gap: 24,
+                    maxWidth: 760,
+                    margin: "0 auto"
+                  },
+                  children: [
+                    {
+                      img: IMAGES.movie.bmVyas,
+                      alt: "BM Vyas — Celebrity Makeup",
+                      title: "BM Vyas — Bollywood Celebrity",
+                      sub: "Exclusive celebrity makeup services",
+                      badge: "⭐ Celebrity",
+                      ocid: "celebrity.collab_item.1"
+                    },
+                    {
+                      img: IMAGES.movie.eightOClock,
+                      alt: "Eight O Clock Short Film",
+                      title: '"Eight O Clock" — Short Film',
+                      sub: "Screen Credit: Makeup by Shila Kashyap",
+                      badge: "🎬 Film Credit",
+                      ocid: "celebrity.collab_item.2"
+                    }
+                  ].map((collab) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                     "div",
                     {
-                      "data-ocid": `celebrity.tseries_item.${i + 1}`,
+                      "data-ocid": collab.ocid,
                       style: {
-                        position: "relative",
                         borderRadius: 20,
                         overflow: "hidden",
                         border: "1px solid rgba(196,149,106,0.3)",
-                        boxShadow: "0 8px 40px rgba(0,0,0,0.4), 0 0 30px rgba(196,149,106,0.1)",
-                        transition: "all 0.4s cubic-bezier(0.23, 1, 0.32, 1)"
+                        boxShadow: "0 8px 40px rgba(0,0,0,0.4)",
+                        transition: "all 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
+                        position: "relative"
                       },
                       onMouseEnter: (e) => {
-                        e.currentTarget.style.transform = "translateY(-6px) scale(1.02)";
-                        e.currentTarget.style.boxShadow = "0 20px 60px rgba(0,0,0,0.5), 0 0 50px rgba(196,149,106,0.2)";
-                        e.currentTarget.style.borderColor = "#C4956A";
+                        const el = e.currentTarget;
+                        el.style.transform = "perspective(800px) rotateX(-2deg) rotateY(3deg) translateY(-6px)";
+                        el.style.boxShadow = "0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(196,149,106,0.2)";
+                        el.style.borderColor = "#C4956A";
                       },
                       onMouseLeave: (e) => {
-                        e.currentTarget.style.transform = "translateY(0) scale(1)";
-                        e.currentTarget.style.boxShadow = "0 8px 40px rgba(0,0,0,0.4), 0 0 30px rgba(196,149,106,0.1)";
-                        e.currentTarget.style.borderColor = "rgba(196,149,106,0.3)";
+                        const el = e.currentTarget;
+                        el.style.transform = "perspective(800px) rotateX(0) rotateY(0) translateY(0)";
+                        el.style.boxShadow = "0 8px 40px rgba(0,0,0,0.4)";
+                        el.style.borderColor = "rgba(196,149,106,0.3)";
                       },
                       children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          "img",
-                          {
-                            src: work.img,
-                            alt: work.title,
-                            style: {
-                              width: "100%",
-                              height: 280,
-                              objectFit: "cover",
-                              display: "block"
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { position: "relative" }, children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            "img",
+                            {
+                              src: collab.img,
+                              alt: collab.alt,
+                              style: {
+                                width: "100%",
+                                height: 300,
+                                objectFit: "cover",
+                                display: "block"
+                              }
                             }
-                          }
-                        ),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          "div",
-                          {
-                            style: {
-                              position: "absolute",
-                              top: 14,
-                              left: 14,
-                              background: "#FF0000",
-                              color: "#fff",
-                              padding: "4px 12px",
-                              borderRadius: 6,
-                              fontSize: 11,
-                              fontWeight: 900,
-                              letterSpacing: "0.08em",
-                              boxShadow: "0 2px 12px rgba(255,0,0,0.4)"
-                            },
-                            children: "T-SERIES"
-                          }
-                        ),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          "div",
-                          {
-                            style: {
-                              position: "absolute",
-                              top: 14,
-                              right: 14,
-                              background: "rgba(196,149,106,0.9)",
-                              color: "#3D2B1F",
-                              padding: "4px 10px",
-                              borderRadius: 6,
-                              fontSize: 10,
-                              fontWeight: 800
-                            },
-                            children: work.views
-                          }
-                        ),
+                          ),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            "div",
+                            {
+                              style: {
+                                position: "absolute",
+                                top: 12,
+                                left: 12,
+                                background: "rgba(26,16,10,0.85)",
+                                border: "1px solid rgba(196,149,106,0.4)",
+                                color: "#E8C99A",
+                                padding: "4px 12px",
+                                borderRadius: 6,
+                                fontSize: 11,
+                                fontWeight: 800,
+                                backdropFilter: "blur(8px)"
+                              },
+                              children: collab.badge
+                            }
+                          )
+                        ] }),
                         /* @__PURE__ */ jsxRuntimeExports.jsxs(
                           "div",
                           {
                             style: {
-                              padding: "16px 18px 20px",
+                              padding: "16px 18px",
                               background: "rgba(26,16,10,0.9)"
                             },
                             children: [
@@ -19912,194 +21006,24 @@ function CelebritySection() {
                                 {
                                   style: {
                                     fontFamily: "var(--font-display)",
-                                    fontSize: 17,
+                                    fontSize: 16,
                                     fontWeight: 700,
                                     color: "#E8C99A",
                                     marginBottom: 4
                                   },
-                                  children: work.title
+                                  children: collab.title
                                 }
                               ),
-                              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                                "div",
-                                {
-                                  style: { fontSize: 12, color: "#9A7B5C", marginBottom: 10 },
-                                  children: work.subtitle
-                                }
-                              ),
-                              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                                "div",
-                                {
-                                  style: {
-                                    fontSize: 10,
-                                    color: "#C4956A",
-                                    fontWeight: 800,
-                                    letterSpacing: "0.1em",
-                                    textTransform: "uppercase",
-                                    borderTop: "1px solid rgba(196,149,106,0.2)",
-                                    paddingTop: 10
-                                  },
-                                  children: "✦ MAKEUP BY SHILA KASHYAP"
-                                }
-                              )
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 12, color: "#9A7B5C" }, children: collab.sub })
                             ]
                           }
                         )
                       ]
                     },
-                    work.title
+                    collab.ocid
                   ))
                 }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { marginBottom: 72 }, children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "h3",
-                  {
-                    style: {
-                      textAlign: "center",
-                      fontFamily: "var(--font-display)",
-                      fontSize: 30,
-                      fontWeight: 700,
-                      color: "#E8C99A",
-                      marginBottom: 32,
-                      letterSpacing: "0.02em"
-                    },
-                    children: "Celebrity Collaborations"
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  "div",
-                  {
-                    style: {
-                      display: "grid",
-                      gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-                      gap: 24,
-                      maxWidth: 700,
-                      margin: "0 auto"
-                    },
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        "div",
-                        {
-                          "data-ocid": "celebrity.collab_item.1",
-                          style: {
-                            borderRadius: 20,
-                            overflow: "hidden",
-                            border: "1px solid rgba(196,149,106,0.3)",
-                            boxShadow: "0 8px 40px rgba(0,0,0,0.4)",
-                            transition: "all 0.3s ease"
-                          },
-                          onMouseEnter: (e) => {
-                            e.currentTarget.style.transform = "translateY(-6px)";
-                          },
-                          onMouseLeave: (e) => {
-                            e.currentTarget.style.transform = "translateY(0)";
-                          },
-                          children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(
-                              "img",
-                              {
-                                src: IMAGES.movie.bmVyas,
-                                alt: "BM Vyas Celebrity",
-                                style: {
-                                  width: "100%",
-                                  height: 300,
-                                  objectFit: "cover",
-                                  display: "block"
-                                }
-                              }
-                            ),
-                            /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                              "div",
-                              {
-                                style: {
-                                  padding: "16px 18px",
-                                  background: "rgba(26,16,10,0.9)"
-                                },
-                                children: [
-                                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                                    "div",
-                                    {
-                                      style: {
-                                        fontFamily: "var(--font-display)",
-                                        fontSize: 16,
-                                        fontWeight: 700,
-                                        color: "#E8C99A",
-                                        marginBottom: 4
-                                      },
-                                      children: "BM Vyas — Celebrity Collaboration"
-                                    }
-                                  ),
-                                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 12, color: "#9A7B5C" }, children: "Professional celebrity makeup services" })
-                                ]
-                              }
-                            )
-                          ]
-                        }
-                      ),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        "div",
-                        {
-                          "data-ocid": "celebrity.collab_item.2",
-                          style: {
-                            borderRadius: 20,
-                            overflow: "hidden",
-                            border: "1px solid rgba(196,149,106,0.3)",
-                            boxShadow: "0 8px 40px rgba(0,0,0,0.4)",
-                            transition: "all 0.3s ease"
-                          },
-                          onMouseEnter: (e) => {
-                            e.currentTarget.style.transform = "translateY(-6px)";
-                          },
-                          onMouseLeave: (e) => {
-                            e.currentTarget.style.transform = "translateY(0)";
-                          },
-                          children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(
-                              "img",
-                              {
-                                src: IMAGES.movie.eightOClock,
-                                alt: "Eight O Clock Film",
-                                style: {
-                                  width: "100%",
-                                  height: 300,
-                                  objectFit: "cover",
-                                  display: "block"
-                                }
-                              }
-                            ),
-                            /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                              "div",
-                              {
-                                style: {
-                                  padding: "16px 18px",
-                                  background: "rgba(26,16,10,0.9)"
-                                },
-                                children: [
-                                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                                    "div",
-                                    {
-                                      style: {
-                                        fontFamily: "var(--font-display)",
-                                        fontSize: 16,
-                                        fontWeight: 700,
-                                        color: "#E8C99A",
-                                        marginBottom: 4
-                                      },
-                                      children: '"Eight O Clock" — Short Film'
-                                    }
-                                  ),
-                                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 12, color: "#9A7B5C" }, children: "Screen Credit: Makeup by Shila Kashyap" })
-                                ]
-                              }
-                            )
-                          ]
-                        }
-                      )
-                    ]
-                  }
-                )
-              ] }),
+              ) }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { textAlign: "center", marginBottom: 64 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "div",
                 {
@@ -20113,7 +21037,7 @@ function CelebritySection() {
                     textTransform: "uppercase",
                     textShadow: "0 0 30px rgba(196,149,106,0.5), 0 0 60px rgba(196,149,106,0.2)"
                   },
-                  children: "✦ FROM JODHPUR TO BOLLYWOOD ✦"
+                  children: "\\u2726 FROM JODHPUR TO BOLLYWOOD \\u2726"
                 }
               ) }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -28789,7 +29713,7 @@ const __vitePreload = function preload2(baseModule, deps, importerUrl) {
     return baseModule().catch(handlePreloadError);
   });
 };
-const HeroCanvas = reactExports.lazy(() => __vitePreload(() => import("./HeroCanvas-C3sFdHIX.js"), true ? [] : void 0));
+const HeroCanvas = reactExports.lazy(() => __vitePreload(() => import("./HeroCanvas-DL_4QBac.js"), true ? [] : void 0));
 const STATS = [
   { value: "500+", label: "Happy Clients" },
   { value: "100%", label: "Satisfaction" },
@@ -28814,15 +29738,47 @@ function HeroSection() {
         background: "linear-gradient(160deg, #FFF8F0 0%, #F5EDE0 40%, #EDD9C0 100%)"
       },
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Suspense, { fallback: null, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { position: "absolute", inset: 0, zIndex: 0 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(HeroCanvas, {}) }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
+        /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Suspense, { fallback: null, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
             style: {
               position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              width: "100%",
+              height: "100%",
+              zIndex: 0,
+              pointerEvents: "none",
+              display: "block"
+            },
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(HeroCanvas, {})
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "block md:hidden",
+            style: {
+              position: "absolute",
               inset: 0,
               zIndex: 1,
-              background: "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(255,248,240,0.3) 0%, rgba(245,237,224,0.15) 100%)"
+              background: "radial-gradient(ellipse 120% 80% at 50% 30%, rgba(232,201,154,0.22) 0%, rgba(196,149,106,0.12) 40%, rgba(245,237,224,0.05) 100%)",
+              pointerEvents: "none"
+            }
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "hidden md:block",
+            style: {
+              position: "absolute",
+              inset: 0,
+              zIndex: 1,
+              background: "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(255,248,240,0.3) 0%, rgba(245,237,224,0.15) 100%)",
+              pointerEvents: "none"
             }
           }
         ),
@@ -28834,14 +29790,16 @@ function HeroSection() {
               zIndex: 10,
               maxWidth: 1200,
               margin: "0 auto",
-              padding: "100px 24px 80px",
+              padding: "90px 20px 70px",
               display: "flex",
               alignItems: "center",
-              gap: 48,
-              flexWrap: "wrap"
+              gap: 40,
+              flexWrap: "wrap",
+              width: "100%",
+              boxSizing: "border-box"
             },
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { flex: "1 1 340px", maxWidth: 640 }, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { flex: "1 1 280px", minWidth: 0, maxWidth: 640 }, children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "div",
                   {
@@ -29041,9 +29999,10 @@ function HeroSection() {
                 "div",
                 {
                   style: {
-                    flex: "0 1 320px",
+                    flex: "0 1 300px",
                     display: "flex",
-                    justifyContent: "center"
+                    justifyContent: "center",
+                    width: "100%"
                   },
                   children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
                     "div",
@@ -30683,6 +31642,7 @@ function App() {
       /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "about", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AboutSection, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "why-us", children: /* @__PURE__ */ jsxRuntimeExports.jsx(WhyChooseUsSection, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "reviews", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewsSection, {}) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "appointment", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AppointmentSection, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "faq", children: /* @__PURE__ */ jsxRuntimeExports.jsx(FaqSection, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "map", children: /* @__PURE__ */ jsxRuntimeExports.jsx(MapSection, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "contact", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CtaSection, {}) })

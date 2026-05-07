@@ -2,6 +2,7 @@ import FloatingButtons from "./components/FloatingButtons";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import AboutSection from "./pages/AboutSection";
+import AppointmentSection from "./pages/AppointmentSection";
 import CelebritySection from "./pages/CelebritySection";
 import CtaSection from "./pages/CtaSection";
 import FaqSection from "./pages/FaqSection";
@@ -37,6 +38,9 @@ export default function App() {
         </section>
         <section id="reviews">
           <ReviewsSection />
+        </section>
+        <section id="appointment">
+          <AppointmentSection />
         </section>
         <section id="faq">
           <FaqSection />

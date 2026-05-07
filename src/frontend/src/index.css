@@ -236,3 +236,16 @@
   font-weight: 300 700;
   font-display: swap;
 }
+
+@media (max-width: 767px) {
+  canvas {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .hero-canvas-wrapper {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+  }
+}

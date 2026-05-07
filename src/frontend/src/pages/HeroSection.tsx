@@ -30,19 +30,46 @@ export default function HeroSection() {
     >
       {/* 3D Canvas Background */}
       <Suspense fallback={null}>
-        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 0,
+            pointerEvents: "none",
+            display: "block",
+          }}
+        >
           <HeroCanvas />
         </div>
       </Suspense>
 
-      {/* Soft overlay for legibility */}
+      {/* Mobile gradient depth enhancer */}
       <div
+        className="block md:hidden"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 1,
+          background:
+            "radial-gradient(ellipse 120% 80% at 50% 30%, rgba(232,201,154,0.22) 0%, rgba(196,149,106,0.12) 40%, rgba(245,237,224,0.05) 100%)",
+          pointerEvents: "none",
+        }}
+      />
+      {/* Desktop overlay for legibility */}
+      <div
+        className="hidden md:block"
         style={{
           position: "absolute",
           inset: 0,
           zIndex: 1,
           background:
             "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(255,248,240,0.3) 0%, rgba(245,237,224,0.15) 100%)",
+          pointerEvents: "none",
         }}
       />
 
@@ -53,15 +80,17 @@ export default function HeroSection() {
           zIndex: 10,
           maxWidth: 1200,
           margin: "0 auto",
-          padding: "100px 24px 80px",
+          padding: "90px 20px 70px",
           display: "flex",
           alignItems: "center",
-          gap: 48,
+          gap: 40,
           flexWrap: "wrap",
+          width: "100%",
+          boxSizing: "border-box",
         }}
       >
         {/* Left: Text */}
-        <div style={{ flex: "1 1 340px", maxWidth: 640 }}>
+        <div style={{ flex: "1 1 280px", minWidth: 0, maxWidth: 640 }}>
           {/* Badge */}
           <div
             style={{
@@ -255,9 +284,10 @@ export default function HeroSection() {
         {/* Right: Owner Photo Card */}
         <div
           style={{
-            flex: "0 1 320px",
+            flex: "0 1 300px",
             display: "flex",
             justifyContent: "center",
+            width: "100%",
           }}
         >
           <div
