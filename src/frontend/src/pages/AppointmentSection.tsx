@@ -213,7 +213,7 @@ export default function AppointmentSection() {
               fontFamily: "var(--font-display)",
             }}
           >
-            ✦ Your dream look is just one step away ✦
+            Your dream look is just one step away
           </p>
         </div>
 
@@ -612,7 +612,7 @@ export default function AppointmentSection() {
                     btn.style.boxShadow = "0 6px 28px rgba(196,149,106,0.4)";
                   }}
                 >
-                  ✦ Confirm Appointment ✦
+                  Confirm Appointment
                 </button>
               </div>
             </form>

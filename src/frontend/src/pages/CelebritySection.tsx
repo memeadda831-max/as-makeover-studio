@@ -11,31 +11,17 @@ type TSeriesWork = {
 
 const TSERIES_WORKS: TSeriesWork[] = [
   {
-    img: IMAGES.tseries.dhoraMathJhupadi,
-    title: "Dhora Mathe Jhupadi",
-    subtitle: "Rajasthani Folk \u2014 T-Series",
+    img: IMAGES.movie.bmVyas,
+    title: "BM Vyas — Bollywood Celebrity",
+    subtitle: "Exclusive Celebrity Makeup",
     viewCount: 10,
     featured: false,
   },
   {
-    img: IMAGES.tseries.chitarJyo,
-    title: "Chitar Jyo Ji Mhane",
-    subtitle: "T-Series Rajasthani Production",
+    img: IMAGES.movie.eightOClock,
+    title: '"Eight O Clock" — Short Film',
+    subtitle: "Screen Credit: Shila Kashyap",
     viewCount: 8,
-    featured: true,
-  },
-  {
-    img: IMAGES.tseries.saajan,
-    title: "Saajan",
-    subtitle: "T-Series Music Video",
-    viewCount: 5,
-    featured: false,
-  },
-  {
-    img: IMAGES.tseries.italPital,
-    title: "Ital Pital",
-    subtitle: "Maati Beats \u2014 T-Series",
-    viewCount: 6,
     featured: true,
   },
 ];
@@ -108,9 +94,10 @@ function TSeriesCard({
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLDivElement;
-        el.style.transform = "translateY(-8px) scale(1.02)";
+        el.style.transform =
+          "perspective(800px) rotateX(-3deg) rotateY(4deg) translateY(-10px) scale(1.03)";
         el.style.boxShadow =
-          "0 24px 70px rgba(0,0,0,0.5), 0 0 60px rgba(196,149,106,0.25)";
+          "0 30px 80px rgba(0,0,0,0.55), 0 0 70px rgba(196,149,106,0.3), 8px 20px 40px rgba(139,94,60,0.2)";
         el.style.borderColor = "#C4956A";
         const shimmer = el.querySelector(
           ".tseries-shimmer",
@@ -119,7 +106,8 @@ function TSeriesCard({
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget as HTMLDivElement;
-        el.style.transform = "translateY(0) scale(1)";
+        el.style.transform =
+          "perspective(800px) rotateX(0) rotateY(0) translateY(0) scale(1)";
         el.style.boxShadow = work.featured
           ? "0 8px 40px rgba(0,0,0,0.4), 0 0 40px rgba(196,149,106,0.18)"
           : "0 8px 40px rgba(0,0,0,0.4), 0 0 30px rgba(196,149,106,0.08)";
@@ -174,7 +162,7 @@ function TSeriesCard({
               boxShadow: "0 2px 12px rgba(196,149,106,0.5)",
             }}
           >
-            \u2726 FEATURED
+            FEATURED
           </div>
         )}
         {/* T-Series badge */}
@@ -232,7 +220,7 @@ function TSeriesCard({
               textTransform: "uppercase",
             }}
           >
-            \u2726 Makeup by Shila Kashyap
+            Makeup by Shila Kashyap
           </div>
           <div
             style={{
@@ -435,7 +423,7 @@ export default function CelebritySection() {
               background: "rgba(196,149,106,0.05)",
             }}
           >
-            \u2726 Celebrity Collaborations \u2726
+            Celebrity Collaborations
           </div>
           <div
             style={{
@@ -460,20 +448,36 @@ export default function CelebritySection() {
           >
             {[
               {
-                img: IMAGES.movie.bmVyas,
-                alt: "BM Vyas \u2014 Celebrity Makeup",
-                title: "BM Vyas \u2014 Bollywood Celebrity",
-                sub: "Exclusive celebrity makeup services",
-                badge: "\u2B50 Celebrity",
+                img: IMAGES.tseries.dhoraMathJhupadi,
+                alt: "Dhora Mathe Jhupadi \u2014 T-Series",
+                title: "Dhora Mathe Jhupadi",
+                sub: "Rajasthani Folk \u2014 T-Series Production",
+                badge: "T-SERIES",
                 ocid: "celebrity.collab_item.1",
               },
               {
-                img: IMAGES.movie.eightOClock,
-                alt: "Eight O Clock Short Film",
-                title: '"Eight O Clock" \u2014 Short Film',
-                sub: "Screen Credit: Makeup by Shila Kashyap",
-                badge: "\uD83C\uDFAC Film Credit",
+                img: IMAGES.tseries.chitarJyo,
+                alt: "Chitar Jyo Ji Mhane \u2014 T-Series",
+                title: "Chitar Jyo Ji Mhane",
+                sub: "T-Series Rajasthani Production",
+                badge: "T-SERIES",
                 ocid: "celebrity.collab_item.2",
+              },
+              {
+                img: IMAGES.tseries.saajan,
+                alt: "Saajan \u2014 T-Series Music Video",
+                title: "Saajan",
+                sub: "T-Series Music Video",
+                badge: "T-SERIES",
+                ocid: "celebrity.collab_item.3",
+              },
+              {
+                img: IMAGES.tseries.italPital,
+                alt: "Ital Pital \u2014 T-Series",
+                title: "Ital Pital",
+                sub: "Maati Beats \u2014 T-Series",
+                badge: "T-SERIES",
+                ocid: "celebrity.collab_item.4",
               },
             ].map((collab) => (
               <div
@@ -490,7 +494,7 @@ export default function CelebritySection() {
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLDivElement;
                   el.style.transform =
-                    "perspective(800px) rotateX(-2deg) rotateY(3deg) translateY(-6px)";
+                    "perspective(900px) rotateX(-3deg) rotateY(5deg) translateY(-8px) scale(1.02)";
                   el.style.boxShadow =
                     "0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(196,149,106,0.2)";
                   el.style.borderColor = "#C4956A";
@@ -498,7 +502,7 @@ export default function CelebritySection() {
                 onMouseLeave={(e) => {
                   const el = e.currentTarget as HTMLDivElement;
                   el.style.transform =
-                    "perspective(800px) rotateX(0) rotateY(0) translateY(0)";
+                    "perspective(900px) rotateX(0) rotateY(0) translateY(0) scale(1)";
                   el.style.boxShadow = "0 8px 40px rgba(0,0,0,0.4)";
                   el.style.borderColor = "rgba(196,149,106,0.3)";
                 }}
@@ -573,7 +577,7 @@ export default function CelebritySection() {
                 "0 0 30px rgba(196,149,106,0.5), 0 0 60px rgba(196,149,106,0.2)",
             }}
           >
-            \u2726 FROM JODHPUR TO BOLLYWOOD \u2726
+            FROM JODHPUR TO BOLLYWOOD
           </div>
         </div>
 

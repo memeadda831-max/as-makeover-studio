@@ -18634,7 +18634,7 @@ function Footer() {
                       textShadow: "0 0 20px rgba(196,149,106,0.5)",
                       letterSpacing: "0.04em"
                     },
-                    children: "✦ AS Makeover"
+                    children: "AS Makeover"
                   }
                 ),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -18918,22 +18918,9 @@ const NAV_LINKS = [
   { label: "Contact", href: "#contact" }
 ];
 function Navbar() {
-  const [scrolled, setScrolled] = reactExports.useState(false);
   const [menuOpen, setMenuOpen] = reactExports.useState(false);
-  const [isMobile, setIsMobile] = reactExports.useState(
-    typeof window !== "undefined" ? window.innerWidth < 768 : false
-  );
   reactExports.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    const onResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-    };
   }, []);
-  const isGlassy = isMobile || scrolled;
   const scrollTo = (id2) => {
     var _a2;
     setMenuOpen(false);
@@ -18952,11 +18939,11 @@ function Navbar() {
           zIndex: 1e3,
           height: 70,
           transition: "background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease",
-          background: isGlassy ? "rgba(255,248,240,0.92)" : "transparent",
-          backdropFilter: isGlassy ? "blur(20px) saturate(1.5)" : "none",
-          WebkitBackdropFilter: isGlassy ? "blur(20px) saturate(1.5)" : "none",
-          boxShadow: isGlassy ? "0 2px 24px rgba(139,94,60,0.14), 0 1px 0 rgba(196,149,106,0.18)" : "none",
-          borderBottom: isGlassy ? "1px solid rgba(196,149,106,0.22)" : "none"
+          background: "rgba(255,248,240,0.95)",
+          backdropFilter: "blur(24px) saturate(1.6)",
+          WebkitBackdropFilter: "blur(24px) saturate(1.6)",
+          boxShadow: "0 2px 32px rgba(139,94,60,0.18), 0 1px 0 rgba(196,149,106,0.22), inset 0 -1px 0 rgba(196,149,106,0.1)",
+          borderBottom: "1px solid rgba(196,149,106,0.25)"
         },
         children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "div",
@@ -18989,7 +18976,7 @@ function Navbar() {
                     cursor: "pointer",
                     padding: 0
                   },
-                  children: "\\u2726 AS Makeover"
+                  children: "AS Makeover"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -19060,7 +19047,7 @@ function Navbar() {
                           e.currentTarget.style.boxShadow = "0 4px 16px rgba(196,149,106,0.4), 0 0 20px rgba(196,149,106,0.15)";
                           e.currentTarget.style.transform = "translateY(0)";
                         },
-                        children: "\\u2726 Book Now"
+                        children: "Book Now"
                       }
                     )
                   ]
@@ -19175,7 +19162,7 @@ function Navbar() {
                 cursor: "pointer",
                 width: "100%"
               },
-              children: "\\u2726 Book Appointment"
+              children: "Book Appointment"
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -19943,7 +19930,7 @@ function AppointmentSection() {
                       fontStyle: "italic",
                       fontFamily: "var(--font-display)"
                     },
-                    children: "✦ Your dream look is just one step away ✦"
+                    children: "Your dream look is just one step away"
                   }
                 )
               ] }),
@@ -20355,7 +20342,7 @@ function AppointmentSection() {
                                     btn.style.transform = "translateY(0) scale(1)";
                                     btn.style.boxShadow = "0 6px 28px rgba(196,149,106,0.4)";
                                   },
-                                  children: "✦ Confirm Appointment ✦"
+                                  children: "Confirm Appointment"
                                 }
                               )
                             ] })
@@ -20445,31 +20432,17 @@ function AppointmentSection() {
 }
 const TSERIES_WORKS = [
   {
-    img: IMAGES.tseries.dhoraMathJhupadi,
-    title: "Dhora Mathe Jhupadi",
-    subtitle: "Rajasthani Folk — T-Series",
+    img: IMAGES.movie.bmVyas,
+    title: "BM Vyas — Bollywood Celebrity",
+    subtitle: "Exclusive Celebrity Makeup",
     viewCount: 10,
     featured: false
   },
   {
-    img: IMAGES.tseries.chitarJyo,
-    title: "Chitar Jyo Ji Mhane",
-    subtitle: "T-Series Rajasthani Production",
+    img: IMAGES.movie.eightOClock,
+    title: '"Eight O Clock" — Short Film',
+    subtitle: "Screen Credit: Shila Kashyap",
     viewCount: 8,
-    featured: true
-  },
-  {
-    img: IMAGES.tseries.saajan,
-    title: "Saajan",
-    subtitle: "T-Series Music Video",
-    viewCount: 5,
-    featured: false
-  },
-  {
-    img: IMAGES.tseries.italPital,
-    title: "Ital Pital",
-    subtitle: "Maati Beats — T-Series",
-    viewCount: 6,
     featured: true
   }
 ];
@@ -20531,8 +20504,8 @@ function TSeriesCard({
       },
       onMouseEnter: (e) => {
         const el = e.currentTarget;
-        el.style.transform = "translateY(-8px) scale(1.02)";
-        el.style.boxShadow = "0 24px 70px rgba(0,0,0,0.5), 0 0 60px rgba(196,149,106,0.25)";
+        el.style.transform = "perspective(800px) rotateX(-3deg) rotateY(4deg) translateY(-10px) scale(1.03)";
+        el.style.boxShadow = "0 30px 80px rgba(0,0,0,0.55), 0 0 70px rgba(196,149,106,0.3), 8px 20px 40px rgba(139,94,60,0.2)";
         el.style.borderColor = "#C4956A";
         const shimmer = el.querySelector(
           ".tseries-shimmer"
@@ -20541,7 +20514,7 @@ function TSeriesCard({
       },
       onMouseLeave: (e) => {
         const el = e.currentTarget;
-        el.style.transform = "translateY(0) scale(1)";
+        el.style.transform = "perspective(800px) rotateX(0) rotateY(0) translateY(0) scale(1)";
         el.style.boxShadow = work.featured ? "0 8px 40px rgba(0,0,0,0.4), 0 0 40px rgba(196,149,106,0.18)" : "0 8px 40px rgba(0,0,0,0.4), 0 0 30px rgba(196,149,106,0.08)";
         el.style.borderColor = work.featured ? "rgba(196,149,106,0.6)" : "rgba(196,149,106,0.3)";
         const shimmer = el.querySelector(
@@ -20595,7 +20568,7 @@ function TSeriesCard({
                 clipPath: "polygon(12px 0%, 100% 0%, 100% 100%, 0% 100%)",
                 boxShadow: "0 2px 12px rgba(196,149,106,0.5)"
               },
-              children: "\\u2726 FEATURED"
+              children: "FEATURED"
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -20658,7 +20631,7 @@ function TSeriesCard({
                           letterSpacing: "0.1em",
                           textTransform: "uppercase"
                         },
-                        children: "\\u2726 Makeup by Shila Kashyap"
+                        children: "Makeup by Shila Kashyap"
                       }
                     ),
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -20891,7 +20864,7 @@ function CelebritySection() {
                           backdropFilter: "blur(8px)",
                           background: "rgba(196,149,106,0.05)"
                         },
-                        children: "\\u2726 Celebrity Collaborations \\u2726"
+                        children: "Celebrity Collaborations"
                       }
                     ),
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -20919,20 +20892,36 @@ function CelebritySection() {
                   },
                   children: [
                     {
-                      img: IMAGES.movie.bmVyas,
-                      alt: "BM Vyas — Celebrity Makeup",
-                      title: "BM Vyas — Bollywood Celebrity",
-                      sub: "Exclusive celebrity makeup services",
-                      badge: "⭐ Celebrity",
+                      img: IMAGES.tseries.dhoraMathJhupadi,
+                      alt: "Dhora Mathe Jhupadi — T-Series",
+                      title: "Dhora Mathe Jhupadi",
+                      sub: "Rajasthani Folk — T-Series Production",
+                      badge: "T-SERIES",
                       ocid: "celebrity.collab_item.1"
                     },
                     {
-                      img: IMAGES.movie.eightOClock,
-                      alt: "Eight O Clock Short Film",
-                      title: '"Eight O Clock" — Short Film',
-                      sub: "Screen Credit: Makeup by Shila Kashyap",
-                      badge: "🎬 Film Credit",
+                      img: IMAGES.tseries.chitarJyo,
+                      alt: "Chitar Jyo Ji Mhane — T-Series",
+                      title: "Chitar Jyo Ji Mhane",
+                      sub: "T-Series Rajasthani Production",
+                      badge: "T-SERIES",
                       ocid: "celebrity.collab_item.2"
+                    },
+                    {
+                      img: IMAGES.tseries.saajan,
+                      alt: "Saajan — T-Series Music Video",
+                      title: "Saajan",
+                      sub: "T-Series Music Video",
+                      badge: "T-SERIES",
+                      ocid: "celebrity.collab_item.3"
+                    },
+                    {
+                      img: IMAGES.tseries.italPital,
+                      alt: "Ital Pital — T-Series",
+                      title: "Ital Pital",
+                      sub: "Maati Beats — T-Series",
+                      badge: "T-SERIES",
+                      ocid: "celebrity.collab_item.4"
                     }
                   ].map((collab) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                     "div",
@@ -20948,13 +20937,13 @@ function CelebritySection() {
                       },
                       onMouseEnter: (e) => {
                         const el = e.currentTarget;
-                        el.style.transform = "perspective(800px) rotateX(-2deg) rotateY(3deg) translateY(-6px)";
+                        el.style.transform = "perspective(900px) rotateX(-3deg) rotateY(5deg) translateY(-8px) scale(1.02)";
                         el.style.boxShadow = "0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(196,149,106,0.2)";
                         el.style.borderColor = "#C4956A";
                       },
                       onMouseLeave: (e) => {
                         const el = e.currentTarget;
-                        el.style.transform = "perspective(800px) rotateX(0) rotateY(0) translateY(0)";
+                        el.style.transform = "perspective(900px) rotateX(0) rotateY(0) translateY(0) scale(1)";
                         el.style.boxShadow = "0 8px 40px rgba(0,0,0,0.4)";
                         el.style.borderColor = "rgba(196,149,106,0.3)";
                       },
@@ -21037,7 +21026,7 @@ function CelebritySection() {
                     textTransform: "uppercase",
                     textShadow: "0 0 30px rgba(196,149,106,0.5), 0 0 60px rgba(196,149,106,0.2)"
                   },
-                  children: "\\u2726 FROM JODHPUR TO BOLLYWOOD \\u2726"
+                  children: "FROM JODHPUR TO BOLLYWOOD"
                 }
               ) }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -21194,7 +21183,7 @@ function CtaSection() {
                     letterSpacing: "0.12em",
                     textTransform: "uppercase"
                   },
-                  children: "✦ TRANSFORM YOUR LOOK TODAY"
+                  children: "TRANSFORM YOUR LOOK TODAY"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -29713,7 +29702,7 @@ const __vitePreload = function preload2(baseModule, deps, importerUrl) {
     return baseModule().catch(handlePreloadError);
   });
 };
-const HeroCanvas = reactExports.lazy(() => __vitePreload(() => import("./HeroCanvas-DL_4QBac.js"), true ? [] : void 0));
+const HeroCanvas = reactExports.lazy(() => __vitePreload(() => import("./HeroCanvas-DJTgcSLs.js"), true ? [] : void 0));
 const STATS = [
   { value: "500+", label: "Happy Clients" },
   { value: "100%", label: "Satisfaction" },
@@ -29890,12 +29879,12 @@ function HeroSection() {
                       {
                         style: {
                           padding: "12px 20px",
-                          background: "rgba(255,248,240,0.7)",
-                          backdropFilter: "blur(12px)",
-                          border: "1px solid rgba(196,149,106,0.25)",
+                          background: "rgba(255,248,240,0.88)",
+                          backdropFilter: "blur(16px) saturate(1.4)",
+                          border: "1px solid rgba(196,149,106,0.28)",
                           borderRadius: 12,
                           textAlign: "center",
-                          boxShadow: "0 4px 16px rgba(196,149,106,0.1)"
+                          boxShadow: "0 8px 28px rgba(196,149,106,0.14), 0 2px 6px rgba(139,94,60,0.08), inset 0 1px 0 rgba(255,255,255,0.8)"
                         },
                         children: [
                           /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -29948,7 +29937,7 @@ function HeroSection() {
                         borderRadius: 50,
                         letterSpacing: "0.06em",
                         textTransform: "uppercase",
-                        boxShadow: "0 6px 30px rgba(196,149,106,0.45)",
+                        boxShadow: "0 8px 36px rgba(196,149,106,0.5), 0 0 30px rgba(196,149,106,0.15)",
                         transition: "all 0.3s ease"
                       },
                       onMouseEnter: (e) => {
@@ -30021,7 +30010,7 @@ function HeroSection() {
                               backdropFilter: "blur(20px)",
                               borderRadius: 24,
                               padding: 12,
-                              boxShadow: "0 20px 80px rgba(139,94,60,0.3), 0 0 60px rgba(196,149,106,0.15)",
+                              boxShadow: "0 30px 100px rgba(139,94,60,0.4), 0 0 80px rgba(196,149,106,0.2), inset 0 1px 0 rgba(255,255,255,0.6)",
                               border: "1px solid rgba(196,149,106,0.3)",
                               animation: "float3d 4s ease-in-out infinite"
                             },
@@ -31036,247 +31025,352 @@ const REVIEWS = [
   }
 ];
 function ReviewsSection() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "section",
     {
       "data-ocid": "reviews.section",
-      style: { background: "#FFF8F0", padding: "100px 0" },
-      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { maxWidth: 1200, margin: "0 auto", padding: "0 24px" }, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { textAlign: "center", marginBottom: 64 }, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              style: {
-                display: "inline-block",
-                fontSize: 12,
-                fontWeight: 700,
-                color: "#C4956A",
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
-                marginBottom: 12
-              },
-              children: "Client Testimonials"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "h2",
-            {
-              style: {
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(36px, 5vw, 54px)",
-                fontWeight: 700,
-                color: "#3D2B1F",
-                marginBottom: 16
-              },
-              children: "What Our Clients Say"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              style: {
-                width: 80,
-                height: 3,
-                background: "linear-gradient(90deg, #C4956A, #8B5E3C)",
-                borderRadius: 4,
-                margin: "0 auto 16px"
-              }
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "p",
-            {
-              style: {
-                fontSize: 16,
-                color: "#6B4423",
-                maxWidth: 480,
-                margin: "0 auto"
-              },
-              children: "Real stories from real clients — transformations that speak for themselves."
-            }
-          )
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { textAlign: "center", marginBottom: 48 }, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              style: {
-                fontSize: 28,
-                color: "#C4956A",
-                letterSpacing: 4,
-                marginBottom: 8
-              },
-              children: "★★★★★"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              style: {
-                fontSize: 14,
-                color: "#8B5E3C",
-                fontWeight: 700,
-                letterSpacing: "0.06em"
-              },
-              children: "5.0 / 5 • Based on 500+ Client Reviews"
-            }
-          )
-        ] }),
+      style: {
+        background: "linear-gradient(160deg, #FFF8F0 0%, #F5EDE0 100%)",
+        padding: "100px 0",
+        position: "relative",
+        overflow: "hidden"
+      },
+      children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
             style: {
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-              gap: 24
+              position: "absolute",
+              top: "5%",
+              left: "5%",
+              width: 360,
+              height: 360,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(196,149,106,0.12) 0%, transparent 70%)",
+              filter: "blur(60px)",
+              pointerEvents: "none",
+              animation: "floatSlow 6s ease-in-out infinite"
+            }
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "10%",
+              right: "5%",
+              width: 280,
+              height: 280,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(139,94,60,0.1) 0%, transparent 70%)",
+              filter: "blur(50px)",
+              pointerEvents: "none",
+              animation: "floatSlow 8s ease-in-out infinite 2s"
+            }
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            style: {
+              maxWidth: 1200,
+              margin: "0 auto",
+              padding: "0 24px",
+              position: "relative",
+              zIndex: 1
             },
-            children: REVIEWS.map((review, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "div",
-              {
-                "data-ocid": `reviews.item.${i + 1}`,
-                style: {
-                  background: "#fff",
-                  borderRadius: 20,
-                  padding: 28,
-                  boxShadow: "0 4px 24px rgba(139,94,60,0.1), 0 1px 4px rgba(139,94,60,0.06)",
-                  border: "1px solid rgba(196,149,106,0.12)",
-                  transition: "all 0.35s cubic-bezier(0.23, 1, 0.32, 1)",
-                  position: "relative"
-                },
-                onMouseEnter: (e) => {
-                  e.currentTarget.style.transform = "translateY(-8px)";
-                  e.currentTarget.style.boxShadow = "0 20px 60px rgba(196,149,106,0.2), 0 0 40px rgba(196,149,106,0.1)";
-                  e.currentTarget.style.borderColor = "rgba(196,149,106,0.3)";
-                },
-                onMouseLeave: (e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 24px rgba(139,94,60,0.1), 0 1px 4px rgba(139,94,60,0.06)";
-                  e.currentTarget.style.borderColor = "rgba(196,149,106,0.12)";
-                },
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { textAlign: "center", marginBottom: 64 }, children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "div",
+                  {
+                    style: {
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      padding: "8px 20px",
+                      background: "rgba(196,149,106,0.1)",
+                      border: "1px solid rgba(196,149,106,0.3)",
+                      borderRadius: 50,
+                      marginBottom: 16,
+                      backdropFilter: "blur(8px)",
+                      boxShadow: "0 0 20px rgba(196,149,106,0.15)"
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 14 }, children: "⭐" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "div",
+                        {
+                          style: {
+                            fontSize: 12,
+                            fontWeight: 700,
+                            color: "#C4956A",
+                            letterSpacing: "0.16em",
+                            textTransform: "uppercase"
+                          },
+                          children: "Client Testimonials"
+                        }
+                      )
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "h2",
+                  {
+                    style: {
+                      fontFamily: "var(--font-display)",
+                      fontSize: "clamp(36px, 5vw, 54px)",
+                      fontWeight: 700,
+                      color: "#3D2B1F",
+                      marginBottom: 16,
+                      textShadow: "0 4px 24px rgba(139,94,60,0.12)"
+                    },
+                    children: "What Our Clients Say"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    style: {
+                      width: 80,
+                      height: 3,
+                      background: "linear-gradient(90deg, transparent, #C4956A, #E8C99A, transparent)",
+                      borderRadius: 4,
+                      margin: "0 auto 16px",
+                      boxShadow: "0 0 16px rgba(196,149,106,0.4)"
+                    }
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "p",
+                  {
+                    style: {
+                      fontSize: 16,
+                      color: "#6B4423",
+                      maxWidth: 480,
+                      margin: "0 auto"
+                    },
+                    children: "Real stories from real clients — transformations that speak for themselves."
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { textAlign: "center", marginBottom: 48 }, children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    style: {
+                      fontSize: 30,
+                      color: "#C4956A",
+                      letterSpacing: 4,
+                      marginBottom: 8,
+                      textShadow: "0 0 20px rgba(196,149,106,0.5)",
+                      animation: "floatSlow 3s ease-in-out infinite",
+                      display: "inline-block"
+                    },
+                    children: "★★★★★"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    style: {
+                      fontSize: 14,
+                      color: "#8B5E3C",
+                      fontWeight: 700,
+                      letterSpacing: "0.06em"
+                    },
+                    children: "5.0 / 5 • Based on 500+ Client Reviews"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  style: {
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+                    gap: 24
+                  },
+                  children: REVIEWS.map((review, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
                     "div",
                     {
+                      "data-ocid": `reviews.item.${i + 1}`,
                       style: {
-                        position: "absolute",
-                        top: 20,
-                        right: 24,
-                        fontFamily: "Georgia, serif",
-                        fontSize: 72,
-                        lineHeight: 1,
-                        color: "rgba(196,149,106,0.12)",
-                        fontWeight: 900,
-                        pointerEvents: "none"
+                        background: "rgba(255,252,248,0.95)",
+                        borderRadius: 20,
+                        padding: 28,
+                        boxShadow: "0 8px 32px rgba(139,94,60,0.12), 0 2px 8px rgba(139,94,60,0.06), inset 0 1px 0 rgba(255,255,255,0.8)",
+                        border: "1px solid rgba(196,149,106,0.15)",
+                        transition: "all 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
+                        position: "relative",
+                        transformStyle: "preserve-3d"
                       },
-                      children: "“"
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "div",
-                    {
-                      style: {
-                        color: "#C4956A",
-                        fontSize: 16,
-                        letterSpacing: 2,
-                        marginBottom: 14
+                      onMouseEnter: (e) => {
+                        const el = e.currentTarget;
+                        el.style.transform = "perspective(900px) rotateX(-3deg) rotateY(3deg) translateY(-10px) scale(1.02)";
+                        el.style.boxShadow = "0 24px 70px rgba(139,94,60,0.2), 0 0 50px rgba(196,149,106,0.15), 8px 16px 40px rgba(139,94,60,0.1)";
+                        el.style.borderColor = "rgba(196,149,106,0.35)";
                       },
-                      children: "★★★★★"
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                    "p",
-                    {
-                      style: {
-                        fontSize: 14,
-                        lineHeight: 1.75,
-                        color: "#5C3D2E",
-                        marginBottom: 20,
-                        fontStyle: "italic"
-                      },
-                      children: [
-                        "“",
-                        review.text,
-                        "”"
-                      ]
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                    "div",
-                    {
-                      style: {
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 14,
-                        borderTop: "1px solid rgba(196,149,106,0.1)",
-                        paddingTop: 16
+                      onMouseLeave: (e) => {
+                        const el = e.currentTarget;
+                        el.style.transform = "none";
+                        el.style.boxShadow = "0 8px 32px rgba(139,94,60,0.12), 0 2px 8px rgba(139,94,60,0.06), inset 0 1px 0 rgba(255,255,255,0.8)";
+                        el.style.borderColor = "rgba(196,149,106,0.15)";
                       },
                       children: [
                         /* @__PURE__ */ jsxRuntimeExports.jsx(
                           "div",
                           {
                             style: {
-                              width: 44,
-                              height: 44,
-                              borderRadius: "50%",
-                              background: "linear-gradient(135deg, #C4956A, #8B5E3C)",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#FFF8F0",
-                              fontWeight: 800,
-                              fontSize: 18,
-                              boxShadow: "0 4px 12px rgba(196,149,106,0.35)",
-                              flexShrink: 0
-                            },
-                            children: review.initial
+                              position: "absolute",
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              height: 2,
+                              borderRadius: "20px 20px 0 0",
+                              background: "linear-gradient(90deg, transparent, rgba(196,149,106,0.5), #C4956A, rgba(196,149,106,0.5), transparent)",
+                              opacity: 0.6
+                            }
                           }
                         ),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            "div",
-                            {
-                              style: { fontWeight: 700, fontSize: 15, color: "#3D2B1F" },
-                              children: review.name
-                            }
-                          ),
-                          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                            "div",
-                            {
-                              style: {
-                                fontSize: 12,
-                                color: "#9A7B5C",
-                                letterSpacing: "0.04em"
-                              },
-                              children: [
-                                "📍 ",
-                                review.location
-                              ]
-                            }
-                          )
-                        ] }),
                         /* @__PURE__ */ jsxRuntimeExports.jsx(
                           "div",
                           {
                             style: {
-                              marginLeft: "auto",
-                              fontSize: 11,
-                              color: "#C4956A",
-                              fontWeight: 700,
-                              letterSpacing: "0.08em"
+                              position: "absolute",
+                              top: 20,
+                              right: 24,
+                              fontFamily: "Georgia, serif",
+                              fontSize: 80,
+                              lineHeight: 1,
+                              color: "rgba(196,149,106,0.1)",
+                              fontWeight: 900,
+                              pointerEvents: "none"
                             },
-                            children: "VERIFIED ✓"
+                            children: "“"
+                          }
+                        ),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "div",
+                          {
+                            style: {
+                              color: "#C4956A",
+                              fontSize: 16,
+                              letterSpacing: 2,
+                              marginBottom: 14,
+                              textShadow: "0 0 8px rgba(196,149,106,0.4)"
+                            },
+                            children: "★★★★★"
+                          }
+                        ),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                          "p",
+                          {
+                            style: {
+                              fontSize: 14,
+                              lineHeight: 1.75,
+                              color: "#5C3D2E",
+                              marginBottom: 20,
+                              fontStyle: "italic"
+                            },
+                            children: [
+                              "“",
+                              review.text,
+                              "”"
+                            ]
+                          }
+                        ),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                          "div",
+                          {
+                            style: {
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 14,
+                              borderTop: "1px solid rgba(196,149,106,0.12)",
+                              paddingTop: 16
+                            },
+                            children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                "div",
+                                {
+                                  style: {
+                                    width: 44,
+                                    height: 44,
+                                    borderRadius: "50%",
+                                    background: "linear-gradient(135deg, #C4956A, #8B5E3C)",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    color: "#FFF8F0",
+                                    fontWeight: 800,
+                                    fontSize: 18,
+                                    boxShadow: "0 4px 16px rgba(196,149,106,0.4), 0 0 20px rgba(196,149,106,0.15)",
+                                    flexShrink: 0
+                                  },
+                                  children: review.initial
+                                }
+                              ),
+                              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                  "div",
+                                  {
+                                    style: { fontWeight: 700, fontSize: 15, color: "#3D2B1F" },
+                                    children: review.name
+                                  }
+                                ),
+                                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                                  "div",
+                                  {
+                                    style: {
+                                      fontSize: 12,
+                                      color: "#9A7B5C",
+                                      letterSpacing: "0.04em"
+                                    },
+                                    children: [
+                                      "📍 ",
+                                      review.location
+                                    ]
+                                  }
+                                )
+                              ] }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                "div",
+                                {
+                                  style: {
+                                    marginLeft: "auto",
+                                    fontSize: 11,
+                                    color: "#C4956A",
+                                    fontWeight: 700,
+                                    letterSpacing: "0.08em",
+                                    padding: "4px 10px",
+                                    background: "rgba(196,149,106,0.1)",
+                                    borderRadius: 20,
+                                    border: "1px solid rgba(196,149,106,0.2)"
+                                  },
+                                  children: "VERIFIED ✓"
+                                }
+                              )
+                            ]
                           }
                         )
                       ]
-                    }
-                  )
-                ]
-              },
-              review.name
-            ))
+                    },
+                    review.name
+                  ))
+                }
+              )
+            ]
           }
-        )
-      ] })
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
+        @keyframes floatSlow {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-14px); }
+        }
+      ` })
+      ]
     }
   );
 }
@@ -31341,7 +31435,7 @@ function ServicesSection() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: "absolute top-0 right-0 w-96 h-96 rounded-full opacity-30 pointer-events-none",
+            className: "absolute top-0 right-0 w-96 h-96 rounded-full opacity-30 pointer-events-none float-slow",
             style: {
               background: "radial-gradient(circle, rgba(196,149,106,0.3), transparent)",
               filter: "blur(80px)"
@@ -31351,10 +31445,20 @@ function ServicesSection() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: "absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-20 pointer-events-none",
+            className: "absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-20 pointer-events-none float-medium",
             style: {
               background: "radial-gradient(circle, rgba(139,94,60,0.3), transparent)",
               filter: "blur(60px)"
+            }
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full opacity-10 pointer-events-none float-fast",
+            style: {
+              background: "radial-gradient(circle, rgba(232,201,154,0.4), transparent)",
+              filter: "blur(50px)"
             }
           }
         ),
@@ -31368,19 +31472,36 @@ function ServicesSection() {
               transition: { duration: 0.7 },
               className: "text-center mb-16",
               children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "p",
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "div",
                   {
-                    className: "text-sm font-semibold tracking-widest uppercase mb-3",
-                    style: { color: "#C4956A" },
-                    children: "What We Offer"
+                    className: "inline-flex items-center gap-2 px-5 py-2 rounded-full mb-4 badge-glow",
+                    style: {
+                      background: "rgba(196,149,106,0.12)",
+                      border: "1px solid rgba(196,149,106,0.35)",
+                      backdropFilter: "blur(10px)"
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontSize: 14 }, children: "✨" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "p",
+                        {
+                          className: "text-sm font-semibold tracking-widest uppercase",
+                          style: { color: "#C4956A" },
+                          children: "What We Offer"
+                        }
+                      )
+                    ]
                   }
                 ),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "h2",
                   {
                     className: "font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-5",
-                    style: { color: "#2A1A10" },
+                    style: {
+                      color: "#2A1A10",
+                      textShadow: "0 4px 24px rgba(139,94,60,0.1)"
+                    },
                     children: "Our Premium Services"
                   }
                 ),
@@ -31397,7 +31518,8 @@ function ServicesSection() {
                   {
                     className: "w-24 h-1 mx-auto mt-6 rounded-full",
                     style: {
-                      background: "linear-gradient(90deg, transparent, #C4956A, transparent)"
+                      background: "linear-gradient(90deg, transparent, #C4956A, transparent)",
+                      boxShadow: "0 0 16px rgba(196,149,106,0.4)"
                     }
                   }
                 )
@@ -31407,16 +31529,29 @@ function ServicesSection() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6", children: services.map((service, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
             motion.div,
             {
-              initial: { opacity: 0, y: 40, rotateX: -8 },
+              initial: { opacity: 0, y: 40, rotateX: -12 },
               whileInView: { opacity: 1, y: 0, rotateX: 0 },
               viewport: { once: true },
-              transition: { duration: 0.6, delay: i * 0.08 },
-              whileHover: { y: -8, scale: 1.02 },
+              transition: {
+                duration: 0.65,
+                delay: i * 0.08,
+                type: "spring",
+                stiffness: 100
+              },
+              whileHover: {
+                y: -12,
+                scale: 1.04,
+                rotateX: -3,
+                rotateY: 3,
+                transition: { duration: 0.3 }
+              },
               "data-ocid": `services.item.${i + 1}`,
-              className: "relative rounded-2xl p-6 transition-smooth group cursor-default shadow-card hover:shadow-elevated",
+              className: "relative rounded-2xl p-6 transition-smooth group cursor-default shimmer-shine border-spin",
               style: {
                 background: "rgba(255,248,240,0.9)",
-                border: "1px solid rgba(196,149,106,0.2)"
+                border: "1px solid rgba(196,149,106,0.22)",
+                boxShadow: "0 8px 30px rgba(139,94,60,0.1), 0 2px 8px rgba(139,94,60,0.06)",
+                transformStyle: "preserve-3d"
               },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -31424,11 +31559,29 @@ function ServicesSection() {
                   {
                     className: "absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-smooth pointer-events-none",
                     style: {
-                      background: "linear-gradient(135deg, rgba(196,149,106,0.08), rgba(139,94,60,0.04))"
+                      background: "linear-gradient(135deg, rgba(196,149,106,0.1), rgba(139,94,60,0.05))",
+                      boxShadow: "inset 0 1px 0 rgba(255,248,240,0.6), inset 0 -1px 0 rgba(139,94,60,0.1)"
                     }
                   }
                 ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-4xl mb-4", children: service.icon }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-smooth",
+                    style: {
+                      background: "linear-gradient(90deg, transparent, #C4956A, #E8C99A, transparent)",
+                      boxShadow: "0 0 16px rgba(196,149,106,0.5)"
+                    }
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "text-4xl mb-4 transition-smooth group-hover:scale-110 group-hover:drop-shadow-lg",
+                    style: { display: "inline-block" },
+                    children: service.icon
+                  }
+                ),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "h3",
                   {
@@ -31448,10 +31601,11 @@ function ServicesSection() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-1.5", children: service.tags.map((tag) => /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "span",
                   {
-                    className: "text-xs px-2 py-0.5 rounded-full",
+                    className: "text-xs px-2 py-0.5 rounded-full transition-smooth group-hover:scale-105",
                     style: {
                       background: "rgba(196,149,106,0.15)",
-                      color: "#8B5E3C"
+                      color: "#8B5E3C",
+                      border: "1px solid rgba(196,149,106,0.15)"
                     },
                     children: tag
                   },
@@ -31526,6 +31680,26 @@ function WhyChooseUsSection() {
             }
           }
         ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "absolute top-10 right-10 w-48 h-48 rounded-full pointer-events-none float-slow",
+            style: {
+              background: "radial-gradient(circle, rgba(196,149,106,0.18), transparent)",
+              filter: "blur(40px)"
+            }
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "absolute bottom-20 left-10 w-56 h-56 rounded-full pointer-events-none float-medium",
+            style: {
+              background: "radial-gradient(circle, rgba(139,94,60,0.15), transparent)",
+              filter: "blur(50px)"
+            }
+          }
+        ),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
             motion.div,
@@ -31536,19 +31710,37 @@ function WhyChooseUsSection() {
               transition: { duration: 0.7 },
               className: "text-center mb-16",
               children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "p",
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "div",
                   {
-                    className: "text-sm font-semibold tracking-widest uppercase mb-3",
-                    style: { color: "#C4956A" },
-                    children: "Why AS Makeover"
+                    className: "inline-flex items-center gap-2 px-5 py-2 rounded-full mb-4",
+                    style: {
+                      background: "rgba(196,149,106,0.12)",
+                      border: "1px solid rgba(196,149,106,0.3)",
+                      backdropFilter: "blur(8px)",
+                      boxShadow: "0 0 20px rgba(196,149,106,0.15), inset 0 0 12px rgba(255,248,240,0.1)"
+                    },
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "👑" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "p",
+                        {
+                          className: "text-sm font-semibold tracking-widest uppercase",
+                          style: { color: "#C4956A" },
+                          children: "Why AS Makeover"
+                        }
+                      )
+                    ]
                   }
                 ),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "h2",
                   {
                     className: "font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-5",
-                    style: { color: "#2A1A10" },
+                    style: {
+                      color: "#2A1A10",
+                      textShadow: "0 4px 24px rgba(139,94,60,0.1)"
+                    },
                     children: "Why Choose Us"
                   }
                 ),
@@ -31565,7 +31757,8 @@ function WhyChooseUsSection() {
                   {
                     className: "w-24 h-1 mx-auto mt-6 rounded-full",
                     style: {
-                      background: "linear-gradient(90deg, transparent, #C4956A, transparent)"
+                      background: "linear-gradient(90deg, transparent, #C4956A, transparent)",
+                      boxShadow: "0 0 16px rgba(196,149,106,0.4)"
                     }
                   }
                 )
@@ -31575,24 +31768,42 @@ function WhyChooseUsSection() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6", children: reasons.map((reason, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
             motion.div,
             {
-              initial: { opacity: 0, y: 50, rotateX: -10 },
+              initial: { opacity: 0, y: 50, rotateX: -12 },
               whileInView: { opacity: 1, y: 0, rotateX: 0 },
               viewport: { once: true },
-              transition: { duration: 0.65, delay: i * 0.09 },
-              whileHover: { y: -10, scale: 1.03 },
+              transition: {
+                duration: 0.65,
+                delay: i * 0.09,
+                type: "spring",
+                stiffness: 90
+              },
+              whileHover: { y: -12, scale: 1.04, rotateX: -4, rotateY: 4 },
               "data-ocid": `why.item.${i + 1}`,
-              className: "relative p-6 rounded-2xl text-center group cursor-default transition-smooth shadow-card hover:shadow-luxury",
+              className: "relative p-6 rounded-2xl text-center group cursor-default transition-smooth border-spin shimmer-shine",
               style: {
                 background: "rgba(255,248,240,0.85)",
-                border: "1px solid rgba(196,149,106,0.22)"
+                border: "1px solid rgba(196,149,106,0.22)",
+                boxShadow: "0 8px 32px rgba(139,94,60,0.1), 0 2px 8px rgba(139,94,60,0.06)",
+                transformStyle: "preserve-3d"
               },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "div",
                   {
-                    className: "w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 transition-smooth group-hover:scale-110 group-hover:rotate-6",
+                    className: "absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-smooth pointer-events-none",
                     style: {
-                      background: "linear-gradient(135deg, rgba(196,149,106,0.2), rgba(139,94,60,0.1))"
+                      background: "linear-gradient(135deg, rgba(196,149,106,0.1), rgba(255,248,240,0.3), rgba(139,94,60,0.05))",
+                      backdropFilter: "blur(4px)"
+                    }
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 transition-smooth group-hover:scale-115 group-hover:rotate-6",
+                    style: {
+                      background: "linear-gradient(135deg, rgba(196,149,106,0.25), rgba(139,94,60,0.12))",
+                      boxShadow: "0 4px 16px rgba(196,149,106,0.2), inset 0 1px 0 rgba(255,255,255,0.5)"
                     },
                     children: reason.icon
                   }
@@ -31618,7 +31829,8 @@ function WhyChooseUsSection() {
                   {
                     className: "absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl opacity-0 group-hover:opacity-100 transition-smooth",
                     style: {
-                      background: "linear-gradient(90deg, transparent, #C4956A, transparent)"
+                      background: "linear-gradient(90deg, transparent, #C4956A, #E8C99A, transparent)",
+                      boxShadow: "0 0 12px rgba(196,149,106,0.5)"
                     }
                   }
                 )

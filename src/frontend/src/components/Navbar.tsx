@@ -11,24 +11,11 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth < 768 : false,
-  );
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    const onResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-    };
+    // Keep component compatible with future scroll/resize usage
   }, []);
-
-  const isGlassy = isMobile || scrolled;
 
   const scrollTo = (id: string) => {
     setMenuOpen(false);
@@ -48,13 +35,12 @@ export default function Navbar() {
           height: 70,
           transition:
             "background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease",
-          background: isGlassy ? "rgba(255,248,240,0.92)" : "transparent",
-          backdropFilter: isGlassy ? "blur(20px) saturate(1.5)" : "none",
-          WebkitBackdropFilter: isGlassy ? "blur(20px) saturate(1.5)" : "none",
-          boxShadow: isGlassy
-            ? "0 2px 24px rgba(139,94,60,0.14), 0 1px 0 rgba(196,149,106,0.18)"
-            : "none",
-          borderBottom: isGlassy ? "1px solid rgba(196,149,106,0.22)" : "none",
+          background: "rgba(255,248,240,0.95)",
+          backdropFilter: "blur(24px) saturate(1.6)",
+          WebkitBackdropFilter: "blur(24px) saturate(1.6)",
+          boxShadow:
+            "0 2px 32px rgba(139,94,60,0.18), 0 1px 0 rgba(196,149,106,0.22), inset 0 -1px 0 rgba(196,149,106,0.1)",
+          borderBottom: "1px solid rgba(196,149,106,0.25)",
         }}
       >
         <div
@@ -86,7 +72,7 @@ export default function Navbar() {
               padding: 0,
             }}
           >
-            \u2726 AS Makeover
+            AS Makeover
           </button>
 
           {/* Desktop nav */}
@@ -164,7 +150,7 @@ export default function Navbar() {
                   "translateY(0)";
               }}
             >
-              \u2726 Book Now
+              Book Now
             </button>
           </div>
 
@@ -277,7 +263,7 @@ export default function Navbar() {
               width: "100%",
             }}
           >
-            \u2726 Book Appointment
+            Book Appointment
           </button>
           <a
             href={`tel:${CONTACT.phone}`}

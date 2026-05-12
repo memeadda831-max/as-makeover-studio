@@ -43,7 +43,7 @@ export default function Footer() {
                 letterSpacing: "0.04em",
               }}
             >
-              ✦ AS Makeover
+              AS Makeover
             </div>
             <div
               style={{

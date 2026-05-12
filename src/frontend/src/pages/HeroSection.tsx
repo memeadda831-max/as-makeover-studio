@@ -176,12 +176,13 @@ export default function HeroSection() {
                 key={stat.label}
                 style={{
                   padding: "12px 20px",
-                  background: "rgba(255,248,240,0.7)",
-                  backdropFilter: "blur(12px)",
-                  border: "1px solid rgba(196,149,106,0.25)",
+                  background: "rgba(255,248,240,0.88)",
+                  backdropFilter: "blur(16px) saturate(1.4)",
+                  border: "1px solid rgba(196,149,106,0.28)",
                   borderRadius: 12,
                   textAlign: "center",
-                  boxShadow: "0 4px 16px rgba(196,149,106,0.1)",
+                  boxShadow:
+                    "0 8px 28px rgba(196,149,106,0.14), 0 2px 6px rgba(139,94,60,0.08), inset 0 1px 0 rgba(255,255,255,0.8)",
                 }}
               >
                 <div
@@ -227,7 +228,8 @@ export default function HeroSection() {
                 borderRadius: 50,
                 letterSpacing: "0.06em",
                 textTransform: "uppercase",
-                boxShadow: "0 6px 30px rgba(196,149,106,0.45)",
+                boxShadow:
+                  "0 8px 36px rgba(196,149,106,0.5), 0 0 30px rgba(196,149,106,0.15)",
                 transition: "all 0.3s ease",
               }}
               onMouseEnter={(e) => {
@@ -304,7 +306,7 @@ export default function HeroSection() {
                 borderRadius: 24,
                 padding: 12,
                 boxShadow:
-                  "0 20px 80px rgba(139,94,60,0.3), 0 0 60px rgba(196,149,106,0.15)",
+                  "0 30px 100px rgba(139,94,60,0.4), 0 0 80px rgba(196,149,106,0.2), inset 0 1px 0 rgba(255,255,255,0.6)",
                 border: "1px solid rgba(196,149,106,0.3)",
                 animation: "float3d 4s ease-in-out infinite",
               }}

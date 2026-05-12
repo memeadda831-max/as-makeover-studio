@@ -41,23 +41,82 @@ export default function ReviewsSection() {
   return (
     <section
       data-ocid="reviews.section"
-      style={{ background: "#FFF8F0", padding: "100px 0" }}
+      style={{
+        background: "linear-gradient(160deg, #FFF8F0 0%, #F5EDE0 100%)",
+        padding: "100px 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
     >
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+      {/* Background floating orbs */}
+      <div
+        style={{
+          position: "absolute",
+          top: "5%",
+          left: "5%",
+          width: 360,
+          height: 360,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(196,149,106,0.12) 0%, transparent 70%)",
+          filter: "blur(60px)",
+          pointerEvents: "none",
+          animation: "floatSlow 6s ease-in-out infinite",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "10%",
+          right: "5%",
+          width: 280,
+          height: 280,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(139,94,60,0.1) 0%, transparent 70%)",
+          filter: "blur(50px)",
+          pointerEvents: "none",
+          animation: "floatSlow 8s ease-in-out infinite 2s",
+        }}
+      />
+
+      <div
+        style={{
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "0 24px",
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
         {/* Heading */}
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <div
             style={{
-              display: "inline-block",
-              fontSize: 12,
-              fontWeight: 700,
-              color: "#C4956A",
-              letterSpacing: "0.16em",
-              textTransform: "uppercase",
-              marginBottom: 12,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "8px 20px",
+              background: "rgba(196,149,106,0.1)",
+              border: "1px solid rgba(196,149,106,0.3)",
+              borderRadius: 50,
+              marginBottom: 16,
+              backdropFilter: "blur(8px)",
+              boxShadow: "0 0 20px rgba(196,149,106,0.15)",
             }}
           >
-            Client Testimonials
+            <span style={{ fontSize: 14 }}>⭐</span>
+            <div
+              style={{
+                fontSize: 12,
+                fontWeight: 700,
+                color: "#C4956A",
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+              }}
+            >
+              Client Testimonials
+            </div>
           </div>
           <h2
             style={{
@@ -66,6 +125,7 @@ export default function ReviewsSection() {
               fontWeight: 700,
               color: "#3D2B1F",
               marginBottom: 16,
+              textShadow: "0 4px 24px rgba(139,94,60,0.12)",
             }}
           >
             What Our Clients Say
@@ -74,9 +134,11 @@ export default function ReviewsSection() {
             style={{
               width: 80,
               height: 3,
-              background: "linear-gradient(90deg, #C4956A, #8B5E3C)",
+              background:
+                "linear-gradient(90deg, transparent, #C4956A, #E8C99A, transparent)",
               borderRadius: 4,
               margin: "0 auto 16px",
+              boxShadow: "0 0 16px rgba(196,149,106,0.4)",
             }}
           />
           <p
@@ -96,10 +158,13 @@ export default function ReviewsSection() {
         <div style={{ textAlign: "center", marginBottom: 48 }}>
           <div
             style={{
-              fontSize: 28,
+              fontSize: 30,
               color: "#C4956A",
               letterSpacing: 4,
               marginBottom: 8,
+              textShadow: "0 0 20px rgba(196,149,106,0.5)",
+              animation: "floatSlow 3s ease-in-out infinite",
+              display: "inline-block",
             }}
           >
             ★★★★★
@@ -129,32 +194,47 @@ export default function ReviewsSection() {
               key={review.name}
               data-ocid={`reviews.item.${i + 1}`}
               style={{
-                background: "#fff",
+                background: "rgba(255,252,248,0.95)",
                 borderRadius: 20,
                 padding: 28,
                 boxShadow:
-                  "0 4px 24px rgba(139,94,60,0.1), 0 1px 4px rgba(139,94,60,0.06)",
-                border: "1px solid rgba(196,149,106,0.12)",
-                transition: "all 0.35s cubic-bezier(0.23, 1, 0.32, 1)",
+                  "0 8px 32px rgba(139,94,60,0.12), 0 2px 8px rgba(139,94,60,0.06), inset 0 1px 0 rgba(255,255,255,0.8)",
+                border: "1px solid rgba(196,149,106,0.15)",
+                transition: "all 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
                 position: "relative",
+                transformStyle: "preserve-3d",
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.transform =
-                  "translateY(-8px)";
-                (e.currentTarget as HTMLDivElement).style.boxShadow =
-                  "0 20px 60px rgba(196,149,106,0.2), 0 0 40px rgba(196,149,106,0.1)";
-                (e.currentTarget as HTMLDivElement).style.borderColor =
-                  "rgba(196,149,106,0.3)";
+                const el = e.currentTarget as HTMLDivElement;
+                el.style.transform =
+                  "perspective(900px) rotateX(-3deg) rotateY(3deg) translateY(-10px) scale(1.02)";
+                el.style.boxShadow =
+                  "0 24px 70px rgba(139,94,60,0.2), 0 0 50px rgba(196,149,106,0.15), 8px 16px 40px rgba(139,94,60,0.1)";
+                el.style.borderColor = "rgba(196,149,106,0.35)";
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLDivElement).style.transform =
-                  "translateY(0)";
-                (e.currentTarget as HTMLDivElement).style.boxShadow =
-                  "0 4px 24px rgba(139,94,60,0.1), 0 1px 4px rgba(139,94,60,0.06)";
-                (e.currentTarget as HTMLDivElement).style.borderColor =
-                  "rgba(196,149,106,0.12)";
+                const el = e.currentTarget as HTMLDivElement;
+                el.style.transform = "none";
+                el.style.boxShadow =
+                  "0 8px 32px rgba(139,94,60,0.12), 0 2px 8px rgba(139,94,60,0.06), inset 0 1px 0 rgba(255,255,255,0.8)";
+                el.style.borderColor = "rgba(196,149,106,0.15)";
               }}
             >
+              {/* Top accent bar */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 2,
+                  borderRadius: "20px 20px 0 0",
+                  background:
+                    "linear-gradient(90deg, transparent, rgba(196,149,106,0.5), #C4956A, rgba(196,149,106,0.5), transparent)",
+                  opacity: 0.6,
+                }}
+              />
+
               {/* Quote mark */}
               <div
                 style={{
@@ -162,9 +242,9 @@ export default function ReviewsSection() {
                   top: 20,
                   right: 24,
                   fontFamily: "Georgia, serif",
-                  fontSize: 72,
+                  fontSize: 80,
                   lineHeight: 1,
-                  color: "rgba(196,149,106,0.12)",
+                  color: "rgba(196,149,106,0.1)",
                   fontWeight: 900,
                   pointerEvents: "none",
                 }}
@@ -179,6 +259,7 @@ export default function ReviewsSection() {
                   fontSize: 16,
                   letterSpacing: 2,
                   marginBottom: 14,
+                  textShadow: "0 0 8px rgba(196,149,106,0.4)",
                 }}
               >
                 ★★★★★
@@ -203,7 +284,7 @@ export default function ReviewsSection() {
                   display: "flex",
                   alignItems: "center",
                   gap: 14,
-                  borderTop: "1px solid rgba(196,149,106,0.1)",
+                  borderTop: "1px solid rgba(196,149,106,0.12)",
                   paddingTop: 16,
                 }}
               >
@@ -219,7 +300,8 @@ export default function ReviewsSection() {
                     color: "#FFF8F0",
                     fontWeight: 800,
                     fontSize: 18,
-                    boxShadow: "0 4px 12px rgba(196,149,106,0.35)",
+                    boxShadow:
+                      "0 4px 16px rgba(196,149,106,0.4), 0 0 20px rgba(196,149,106,0.15)",
                     flexShrink: 0,
                   }}
                 >
@@ -248,6 +330,10 @@ export default function ReviewsSection() {
                     color: "#C4956A",
                     fontWeight: 700,
                     letterSpacing: "0.08em",
+                    padding: "4px 10px",
+                    background: "rgba(196,149,106,0.1)",
+                    borderRadius: 20,
+                    border: "1px solid rgba(196,149,106,0.2)",
                   }}
                 >
                   VERIFIED ✓
@@ -257,6 +343,13 @@ export default function ReviewsSection() {
           ))}
         </div>
       </div>
+
+      <style>{`
+        @keyframes floatSlow {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-14px); }
+        }
+      `}</style>
     </section>
   );
 }

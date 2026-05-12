@@ -60,7 +60,7 @@ export default function ServicesSection() {
     >
       {/* Background orbs */}
       <div
-        className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-30 pointer-events-none"
+        className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-30 pointer-events-none float-slow"
         style={{
           background:
             "radial-gradient(circle, rgba(196,149,106,0.3), transparent)",
@@ -68,11 +68,19 @@ export default function ServicesSection() {
         }}
       />
       <div
-        className="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-20 pointer-events-none"
+        className="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-20 pointer-events-none float-medium"
         style={{
           background:
             "radial-gradient(circle, rgba(139,94,60,0.3), transparent)",
           filter: "blur(60px)",
+        }}
+      />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full opacity-10 pointer-events-none float-fast"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(232,201,154,0.4), transparent)",
+          filter: "blur(50px)",
         }}
       />
 
@@ -84,15 +92,28 @@ export default function ServicesSection() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <p
-            className="text-sm font-semibold tracking-widest uppercase mb-3"
-            style={{ color: "#C4956A" }}
+          <div
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full mb-4 badge-glow"
+            style={{
+              background: "rgba(196,149,106,0.12)",
+              border: "1px solid rgba(196,149,106,0.35)",
+              backdropFilter: "blur(10px)",
+            }}
           >
-            What We Offer
-          </p>
+            <span style={{ fontSize: 14 }}>✨</span>
+            <p
+              className="text-sm font-semibold tracking-widest uppercase"
+              style={{ color: "#C4956A" }}
+            >
+              What We Offer
+            </p>
+          </div>
           <h2
             className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-5"
-            style={{ color: "#2A1A10" }}
+            style={{
+              color: "#2A1A10",
+              textShadow: "0 4px 24px rgba(139,94,60,0.1)",
+            }}
           >
             Our Premium Services
           </h2>
@@ -108,6 +129,7 @@ export default function ServicesSection() {
             style={{
               background:
                 "linear-gradient(90deg, transparent, #C4956A, transparent)",
+              boxShadow: "0 0 16px rgba(196,149,106,0.4)",
             }}
           />
         </motion.div>
@@ -116,27 +138,57 @@ export default function ServicesSection() {
           {services.map((service, i) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 40, rotateX: -8 }}
+              initial={{ opacity: 0, y: 40, rotateX: -12 }}
               whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
-              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{
+                duration: 0.65,
+                delay: i * 0.08,
+                type: "spring",
+                stiffness: 100,
+              }}
+              whileHover={{
+                y: -12,
+                scale: 1.04,
+                rotateX: -3,
+                rotateY: 3,
+                transition: { duration: 0.3 },
+              }}
               data-ocid={`services.item.${i + 1}`}
-              className="relative rounded-2xl p-6 transition-smooth group cursor-default shadow-card hover:shadow-elevated"
+              className="relative rounded-2xl p-6 transition-smooth group cursor-default shimmer-shine border-spin"
               style={{
                 background: "rgba(255,248,240,0.9)",
-                border: "1px solid rgba(196,149,106,0.2)",
+                border: "1px solid rgba(196,149,106,0.22)",
+                boxShadow:
+                  "0 8px 30px rgba(139,94,60,0.1), 0 2px 8px rgba(139,94,60,0.06)",
+                transformStyle: "preserve-3d",
               }}
             >
-              {/* Hover glow */}
+              {/* Hover gradient overlay */}
               <div
                 className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-smooth pointer-events-none"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(196,149,106,0.08), rgba(139,94,60,0.04))",
+                    "linear-gradient(135deg, rgba(196,149,106,0.1), rgba(139,94,60,0.05))",
+                  boxShadow:
+                    "inset 0 1px 0 rgba(255,248,240,0.6), inset 0 -1px 0 rgba(139,94,60,0.1)",
                 }}
               />
-              <div className="text-4xl mb-4">{service.icon}</div>
+              {/* Top accent line on hover */}
+              <div
+                className="absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-smooth"
+                style={{
+                  background:
+                    "linear-gradient(90deg, transparent, #C4956A, #E8C99A, transparent)",
+                  boxShadow: "0 0 16px rgba(196,149,106,0.5)",
+                }}
+              />
+              <div
+                className="text-4xl mb-4 transition-smooth group-hover:scale-110 group-hover:drop-shadow-lg"
+                style={{ display: "inline-block" }}
+              >
+                {service.icon}
+              </div>
               <h3
                 className="font-display text-lg font-bold mb-3"
                 style={{ color: "#2A1A10" }}
@@ -153,10 +205,11 @@ export default function ServicesSection() {
                 {service.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs px-2 py-0.5 rounded-full"
+                    className="text-xs px-2 py-0.5 rounded-full transition-smooth group-hover:scale-105"
                     style={{
                       background: "rgba(196,149,106,0.15)",
                       color: "#8B5E3C",
+                      border: "1px solid rgba(196,149,106,0.15)",
                     }}
                   >
                     {tag}

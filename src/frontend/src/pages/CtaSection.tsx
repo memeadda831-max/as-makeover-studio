@@ -80,7 +80,7 @@ export default function CtaSection() {
             textTransform: "uppercase",
           }}
         >
-          ✦ TRANSFORM YOUR LOOK TODAY
+          TRANSFORM YOUR LOOK TODAY
         </div>
 
         {/* Heading */}
