@@ -12,14 +12,14 @@ type TSeriesWork = {
 const TSERIES_WORKS: TSeriesWork[] = [
   {
     img: IMAGES.movie.bmVyas,
-    title: "TSERIES-DHORA MATHE JHUPADI ",
+    title: "BM Vyas — Bollywood Celebrity",
     subtitle: "Exclusive Celebrity Makeup",
     viewCount: 10,
     featured: false,
   },
   {
     img: IMAGES.movie.eightOClock,
-    title: '"SAAJAN" — MUSIC VIDEO',
+    title: '"Eight O Clock" — Short Film',
     subtitle: "Screen Credit: Shila Kashyap",
     viewCount: 8,
     featured: true,
@@ -28,18 +28,18 @@ const TSERIES_WORKS: TSeriesWork[] = [
 
 const ACHIEVEMENTS = [
   {
-    icon: "Fully ",
+    icon: "\uD83C\uDFAC",
     label: "Official T-Series Artist",
     sub: "Multiple music videos",
   },
-  { icon: "Fully", label: "Film Credited", sub: "Eight O Clock" },
+  { icon: "\uD83C\uDFA5", label: "Film Credited", sub: "Eight O Clock" },
   {
-    icon: "Fully",
+    icon: "\u2B50",
     label: "Celebrity Makeup",
     sub: "Bollywood collaborations",
   },
   {
-    icon: ".",
+    icon: "\uD83C\uDF93",
     label: "Bombay School Alumni",
     sub: "Advance Prosthetic Certified",
   },
@@ -368,8 +368,7 @@ export default function CelebritySection() {
             }}
           >
             Makeup by{" "}
-            <strong style={{ color: "#E8C99A" }}>Shila Kashyap</strong> \u2014
-            Official Artist for Major Bollywood Music Videos & Films
+            <strong style={{ color: "#E8C99A" }}>Shila Kashyap</strong>
           </p>
         </div>
 
@@ -442,42 +441,50 @@ export default function CelebritySection() {
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap: 24,
-              maxWidth: 760,
+              maxWidth: 1100,
               margin: "0 auto",
             }}
           >
             {[
               {
                 img: IMAGES.tseries.dhoraMathJhupadi,
-                alt: "FACE INJURY MAKEUP",
-                title: "Face Injury Makeupi",
-                sub: "Realistic Face Makeup",
-                badge: "Film",
+                alt: "Dhora Madhe Jhupadi - T-Series",
+                title: "Dhora Madhe Jhupadi",
+                sub: "T-Series Music Video",
+                badge: "T-SERIES",
                 ocid: "celebrity.collab_item.1",
               },
               {
-                img: IMAGES.tseries.chitarJyo,
-                alt: "Chitar Jyo Ji Mhane \u2014 T-Series",
-                title: "Chitar Jyo Ji Mhane",
-                sub: "T-Series Rajasthani Production",
+                img: IMAGES.tseries.saajan,
+                alt: "Saajan - T-Series Music Video",
+                title: "Saajan",
+                sub: "T-Series Music Video",
                 badge: "T-SERIES",
                 ocid: "celebrity.collab_item.2",
               },
               {
-                img: IMAGES.tseries.saajan,
-                alt: "Injury Makeup",
+                img: IMAGES.sfx.wound1,
+                alt: "Injury Makeup - SFX",
                 title: "Injury Makeup",
-                sub: "Face Makeup",
-                badge: "Injury Makeup",
+                sub: "SFX Makeup",
+                badge: "SFX",
                 ocid: "celebrity.collab_item.3",
               },
               {
-                img: IMAGES.tseries.italPital,
-                alt: "Ital Pital  T-Series",
-                title: "Ital Pital",
-                sub: "Maati Beats T-Series",
+                img: IMAGES.tseries.chitarJyo,
+                alt: "Chittar Jyo Ji Mhane - T-Series",
+                title: "Chittar Jyo Ji Mhane",
+                sub: "T-Series Music Video",
                 badge: "T-SERIES",
                 ocid: "celebrity.collab_item.4",
+              },
+              {
+                img: IMAGES.sfx.faceWounds,
+                alt: "Accident Face Makeup - SFX",
+                title: "Accident Face Makeup",
+                sub: "SFX Makeup",
+                badge: "SFX",
+                ocid: "celebrity.collab_item.5",
               },
             ].map((collab) => (
               <div

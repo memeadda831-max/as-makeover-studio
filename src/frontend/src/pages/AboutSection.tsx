@@ -209,7 +209,7 @@ export default function AboutSection() {
                     textShadow: "0 0 12px rgba(196,149,106,0.4)",
                   }}
                 >
-                  🎓 WORKED WITH TSERIES .
+                  🎓 Bombay School of Make-up & Hair
                 </div>
                 <div
                   style={{
@@ -220,7 +220,7 @@ export default function AboutSection() {
                     letterSpacing: "0.06em",
                   }}
                 >
-                  Official  — Advance Prosthetic Artistry
+                  Official Certificate — Advance Prosthetic Artistry
                 </div>
               </div>
             </div>
