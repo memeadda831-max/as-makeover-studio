@@ -76,6 +76,34 @@ export default function Navbar() {
           </button>
 
           {/* Desktop nav */}
+         <button
+  className="md:hidden"
+  onClick={() => setMenuOpen(!menuOpen)}
+  style={{ fontSize: "28px", background: "none", border: "none" }}
+>
+  ☰
+</button>
+          {menuOpen && (
+  <div
+    className="md:hidden"
+    style={{
+      position: "fixed",
+      top: 0,
+      right: 0,
+      width: "220px",
+      height: "100%",
+      background: "white",
+      padding: "20px",
+      boxShadow: "-2px 0 10px rgba(0,0,0,0.2)"
+    }}
+  >
+    {NAV_LINKS.map((link) => (
+      <div key={link.label} style={{ padding: "12px 0" }}>
+        {link.label}
+      </div>
+    ))}
+  </div>
+)}
           <div
             style={{ display: "flex", gap: 8, alignItems: "center" }}
             className="hidden md:flex"
