@@ -12,14 +12,14 @@ type TSeriesWork = {
 const TSERIES_WORKS: TSeriesWork[] = [
   {
     img: IMAGES.movie.bmVyas,
-    title: "BM Vyas — Bollywood Celebrity",
+    title: "TSERIES-DHORA MATHE JHUPADI ",
     subtitle: "Exclusive Celebrity Makeup",
     viewCount: 10,
     featured: false,
   },
   {
     img: IMAGES.movie.eightOClock,
-    title: '"Eight O Clock" — Short Film',
+    title: '"SAAJAN" — MUSIC VIDEO',
     subtitle: "Screen Credit: Shila Kashyap",
     viewCount: 8,
     featured: true,
@@ -28,18 +28,18 @@ const TSERIES_WORKS: TSeriesWork[] = [
 
 const ACHIEVEMENTS = [
   {
-    icon: "\uD83C\uDFAC",
+    icon: "Fully ",
     label: "Official T-Series Artist",
     sub: "Multiple music videos",
   },
-  { icon: "\uD83C\uDFA5", label: "Film Credited", sub: "Eight O Clock" },
+  { icon: "Fully", label: "Film Credited", sub: "Eight O Clock" },
   {
-    icon: "\u2B50",
+    icon: "Fully",
     label: "Celebrity Makeup",
     sub: "Bollywood collaborations",
   },
   {
-    icon: "\uD83C\uDF93",
+    icon: ".",
     label: "Bombay School Alumni",
     sub: "Advance Prosthetic Certified",
   },
@@ -449,10 +449,10 @@ export default function CelebritySection() {
             {[
               {
                 img: IMAGES.tseries.dhoraMathJhupadi,
-                alt: "Dhora Mathe Jhupadi \u2014 T-Series",
-                title: "Dhora Mathe Jhupadi",
-                sub: "Rajasthani Folk \u2014 T-Series Production",
-                badge: "T-SERIES",
+                alt: "FACE INJURY MAKEUP",
+                title: "Face Injury Makeupi",
+                sub: "Realistic Face Makeup",
+                badge: "Film",
                 ocid: "celebrity.collab_item.1",
               },
               {
@@ -465,17 +465,17 @@ export default function CelebritySection() {
               },
               {
                 img: IMAGES.tseries.saajan,
-                alt: "Saajan \u2014 T-Series Music Video",
-                title: "Saajan",
-                sub: "T-Series Music Video",
-                badge: "T-SERIES",
+                alt: "Injury Makeup",
+                title: "Injury Makeup",
+                sub: "Face Makeup",
+                badge: "Injury Makeup",
                 ocid: "celebrity.collab_item.3",
               },
               {
                 img: IMAGES.tseries.italPital,
-                alt: "Ital Pital \u2014 T-Series",
+                alt: "Ital Pital  T-Series",
                 title: "Ital Pital",
-                sub: "Maati Beats \u2014 T-Series",
+                sub: "Maati Beats T-Series",
                 badge: "T-SERIES",
                 ocid: "celebrity.collab_item.4",
               },
