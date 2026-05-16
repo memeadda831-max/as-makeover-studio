@@ -1,5 +1,5 @@
 import { CONTACT } from "@/utils/assets";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
@@ -13,34 +13,26 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    // Keep component compatible with future scroll/resize usage
-  }, []);
-
   const scrollTo = (id: string) => {
     setMenuOpen(false);
-    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector(id)?.scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   return (
     <>
       <nav
-        data-ocid="navbar"
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 1000,
           height: 70,
-          transition:
-            "background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease",
+          zIndex: 1000,
           background: "rgba(255,248,240,0.95)",
-          backdropFilter: "blur(24px) saturate(1.6)",
-          WebkitBackdropFilter: "blur(24px) saturate(1.6)",
-          boxShadow:
-            "0 2px 32px rgba(139,94,60,0.18), 0 1px 0 rgba(196,149,106,0.22), inset 0 -1px 0 rgba(196,149,106,0.1)",
-          borderBottom: "1px solid rgba(196,149,106,0.25)",
+          backdropFilter: "blur(24px)",
+          borderBottom: "1px solid rgba(196,149,106,0.2)",
         }}
       >
         <div
@@ -48,84 +40,35 @@ export default function Navbar() {
             maxWidth: 1200,
             margin: "0 auto",
             height: "100%",
+            padding: "0 24px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "0 24px",
           }}
         >
           {/* Logo */}
           <button
-            type="button"
             onClick={() => scrollTo("#home")}
-            data-ocid="navbar.logo_link"
             style={{
-              fontFamily: "var(--font-display), serif",
+              background: "none",
+              border: "none",
               fontSize: 22,
               fontWeight: 700,
               color: "#3D2B1F",
-              letterSpacing: "0.04em",
-              textShadow: "0 0 20px rgba(196,149,106,0.5)",
-              background: "none",
-              border: "none",
               cursor: "pointer",
-              padding: 0,
             }}
           >
             AS Makeover
           </button>
 
-          {/* Desktop nav */}
-      <button
-  onClick={() => setMenuOpen(!menuOpen)}
-  className="md:hidden"
-  style={{
-    width: "44px",
-    height: "44px",
-    borderRadius: "12px",
-    border: "none",
-    background: "rgba(61,43,31,0.08)",
-    color: "#3D2B1F",
-    fontSize: "26px"
-  }}
->
-  {menuOpen ? "✕" : "☰"}
-</button>
-          {menuOpen && (
-  <div
-    className="md:hidden"
-    style={{
-      position: "fixed",
-      top: "80px",
-      left: "12px",
-      right: "12px",
-      borderRadius: "24px",
-      background: "rgba(245,238,228,0.92)",
-      backdropFilter: "blur(20px)",
-      padding: "24px",
-      zIndex: 999,
-      boxShadow: "0 10px 40px rgba(0,0,0,0.08)"
-    }}
-  >
-    {NAV_LINKS.map((link) => (
-      <div
-        key={link.label}
-        style={{
-          padding: "16px 0",
-          fontSize: "20px",
-          fontWeight: 600,
-          color: "#3D2B1F",
-          borderBottom: "1px solid rgba(61,43,31,0.08)"
-        }}
-      >
-        {link.label}
-      </div>
-    ))}
-         
-
-         <div
-            style={{ display: "flex", gap: 8, alignItems: "center" }}
+          {/* Desktop */}
+          <div
             className="hidden md:flex"
+            style={{
+              display: "flex",
+              gap: 8,
+              alignItems: "center",
+            }}
           >
             {NAV_LINKS.map((link) => (
               <a
@@ -135,138 +78,53 @@ export default function Navbar() {
                   e.preventDefault();
                   scrollTo(link.href);
                 }}
-                data-ocid={`navbar.${link.label.toLowerCase().replace(/ /g, "_")}_link`}
                 style={{
                   padding: "8px 16px",
                   color: "#3D2B1F",
                   textDecoration: "none",
-                  fontWeight: 500,
-                  fontSize: 14,
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                  borderRadius: 8,
-                  transition: "all 0.25s ease",
-                  position: "relative",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color =
-                    "#C4956A";
-                  (e.currentTarget as HTMLAnchorElement).style.textShadow =
-                    "0 0 12px rgba(196,149,106,0.5)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color =
-                    "#3D2B1F";
-                  (e.currentTarget as HTMLAnchorElement).style.textShadow =
-                    "none";
+                  fontWeight: 600,
                 }}
               >
                 {link.label}
               </a>
             ))}
-            <button
-              type="button"
-              data-ocid="navbar.book_cta_button"
-              onClick={() => scrollTo("#appointment")}
-              style={{
-                marginLeft: 8,
-                padding: "10px 22px",
-                background: "linear-gradient(135deg, #C4956A 0%, #8B5E3C 100%)",
-                color: "#FFF8F0",
-                fontWeight: 700,
-                fontSize: 13,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                borderRadius: 50,
-                boxShadow:
-                  "0 4px 16px rgba(196,149,106,0.4), 0 0 20px rgba(196,149,106,0.15)",
-                transition: "all 0.25s ease",
-                border: "1px solid rgba(232,201,154,0.3)",
-                cursor: "pointer",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.boxShadow =
-                  "0 6px 24px rgba(196,149,106,0.6), 0 0 30px rgba(196,149,106,0.2)";
-                (e.currentTarget as HTMLButtonElement).style.transform =
-                  "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.boxShadow =
-                  "0 4px 16px rgba(196,149,106,0.4), 0 0 20px rgba(196,149,106,0.15)";
-                (e.currentTarget as HTMLButtonElement).style.transform =
-                  "translateY(0)";
-              }}
-            >
-              Book Now
-            </button>
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile button */}
           <button
-            type="button"
-            className="flex md:hidden"
-            data-ocid="navbar.hamburger_button"
+            className="md:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
             style={{
-              background: menuOpen
-                ? "rgba(196,149,106,0.15)"
-                : "rgba(255,248,240,0.6)",
-              border: "1.5px solid rgba(196,149,106,0.35)",
-              borderRadius: 10,
-              cursor: "pointer",
-              padding: "7px 9px",
+              width: 44,
+              height: 44,
+              border: "none",
+              borderRadius: 12,
+              background: "rgba(61,43,31,0.08)",
               color: "#3D2B1F",
-              backdropFilter: "blur(8px)",
-              transition: "all 0.2s ease",
+              fontSize: 26,
+              cursor: "pointer",
             }}
-            aria-label="Toggle menu"
           >
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#3D2B1F"
-              strokeWidth="2.5"
-              aria-hidden="true"
-              role="presentation"
-            >
-              {menuOpen ? (
-                <>
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </>
-              ) : (
-                <>
-                  <line x1="3" y1="6" x2="21" y2="6" />
-                  <line x1="3" y1="12" x2="21" y2="12" />
-                  <line x1="3" y1="18" x2="21" y2="18" />
-                </>
-              )}
-            </svg>
+            {menuOpen ? "✕" : "☰"}
           </button>
         </div>
       </nav>
 
-      {/* Mobile dropdown */}
+      {/* Mobile menu */}
       {menuOpen && (
         <div
-          data-ocid="navbar.mobile_menu"
+          className="md:hidden"
           style={{
             position: "fixed",
             top: 70,
-            left: 0,
-            right: 0,
+            left: 12,
+            right: 12,
             zIndex: 999,
-            background: "rgba(255,248,240,0.97)",
-            backdropFilter: "blur(24px) saturate(1.6)",
-            WebkitBackdropFilter: "blur(24px) saturate(1.6)",
-            borderBottom: "1px solid rgba(196,149,106,0.25)",
-            padding: "12px 20px 20px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-            boxShadow: "0 16px 48px rgba(139,94,60,0.16)",
+            borderRadius: 24,
+            background: "rgba(245,238,228,0.92)",
+            backdropFilter: "blur(20px)",
+            padding: 24,
+            boxShadow: "0 10px 40px rgba(0,0,0,0.08)",
           }}
         >
           {NAV_LINKS.map((link) => (
@@ -278,59 +136,50 @@ export default function Navbar() {
                 scrollTo(link.href);
               }}
               style={{
-                padding: "13px 16px",
+                display: "block",
+                padding: "16px 0",
                 color: "#3D2B1F",
                 textDecoration: "none",
+                fontSize: 18,
                 fontWeight: 600,
-                fontSize: 15,
-                borderRadius: 10,
-                borderBottom: "1px solid rgba(196,149,106,0.12)",
-                letterSpacing: "0.04em",
-                textTransform: "uppercase",
+                borderBottom: "1px solid rgba(61,43,31,0.08)",
               }}
             >
               {link.label}
-          </a>
-             ))}
-          
-           </div>
-         )}
+            </a>
+          ))}
+
           <button
-            type="button"
             onClick={() => scrollTo("#appointment")}
             style={{
-              marginTop: 10,
-              padding: "14px 16px",
-              background: "linear-gradient(135deg, #C4956A, #8B5E3C)",
-              color: "#FFF8F0",
-              fontWeight: 700,
-              fontSize: 14,
-              borderRadius: 12,
-              letterSpacing: "0.08em",
-              boxShadow: "0 4px 20px rgba(196,149,106,0.4)",
-              border: "none",
-              cursor: "pointer",
               width: "100%",
+              marginTop: 16,
+              padding: 14,
+              border: "none",
+              borderRadius: 12,
+              background: "linear-gradient(135deg,#C4956A,#8B5E3C)",
+              color: "white",
+              fontWeight: 700,
+              cursor: "pointer",
             }}
           >
             Book Appointment
           </button>
+
           <a
             href={`tel:${CONTACT.phone}`}
             style={{
-              padding: "14px 16px",
-              background: "rgba(196,149,106,0.08)",
-              border: "1px solid rgba(196,149,106,0.25)",
-              color: "#C4956A",
-              textDecoration: "none",
-              fontWeight: 700,
-              fontSize: 14,
-              borderRadius: 12,
+              display: "block",
               textAlign: "center",
-              letterSpacing: "0.08em",
+              marginTop: 12,
+              padding: 14,
+              borderRadius: 12,
+              textDecoration: "none",
+              color: "#C4956A",
+              border: "1px solid rgba(196,149,106,0.2)",
             }}
           >
-             Call: {CONTACT.phone}
+            Call: {CONTACT.phone}
           </a>
         </div>
       )}
