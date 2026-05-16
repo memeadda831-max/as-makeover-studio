@@ -233,7 +233,7 @@ function TSeriesCard({
               borderRadius: 20,
             }}
           >
-            {inView ? `${count}M+` : "\u2014"} \uD83D\uDC41
+            {inView ? `${count}M+` : "\u2014"} 
           </div>
         </div>
       </div>
@@ -322,7 +322,7 @@ export default function CelebritySection() {
               backdropFilter: "blur(8px)",
             }}
           >
-            <span style={{ fontSize: 18 }}>\uD83C\uDFA6</span>
+            <span style={{ fontSize: 18 }}></span>
             <span
               style={{
                 color: "#C4956A",
