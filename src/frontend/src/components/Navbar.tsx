@@ -76,35 +76,54 @@ export default function Navbar() {
           </button>
 
           {/* Desktop nav */}
-         <button
-  className="md:hidden"
+      <button
   onClick={() => setMenuOpen(!menuOpen)}
-  style={{ fontSize: "28px", background: "none", border: "none" }}
+  className="md:hidden"
+  style={{
+    width: "44px",
+    height: "44px",
+    borderRadius: "12px",
+    border: "none",
+    background: "rgba(61,43,31,0.08)",
+    color: "#3D2B1F",
+    fontSize: "26px"
+  }}
 >
-  ☰
+  {menuOpen ? "✕" : "☰"}
 </button>
           {menuOpen && (
   <div
     className="md:hidden"
     style={{
       position: "fixed",
-      top: 0,
-      right: 0,
-      width: "220px",
-      height: "100%",
-      background: "white",
-      padding: "20px",
-      boxShadow: "-2px 0 10px rgba(0,0,0,0.2)"
+      top: "80px",
+      left: "12px",
+      right: "12px",
+      borderRadius: "24px",
+      background: "rgba(245,238,228,0.92)",
+      backdropFilter: "blur(20px)",
+      padding: "24px",
+      zIndex: 999,
+      boxShadow: "0 10px 40px rgba(0,0,0,0.08)"
     }}
   >
     {NAV_LINKS.map((link) => (
-      <div key={link.label} style={{ padding: "12px 0" }}>
+      <div
+        key={link.label}
+        style={{
+          padding: "16px 0",
+          fontSize: "20px",
+          fontWeight: 600,
+          color: "#3D2B1F",
+          borderBottom: "1px solid rgba(61,43,31,0.08)"
+        }}
+      >
         {link.label}
       </div>
-    ))}
-  </div>
-)}
-          <div
+    )}
+         
+
+         <div
             style={{ display: "flex", gap: 8, alignItems: "center" }}
             className="hidden md:flex"
           >
