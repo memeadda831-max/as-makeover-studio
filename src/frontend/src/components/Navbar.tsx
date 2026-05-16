@@ -290,8 +290,10 @@ export default function Navbar() {
               }}
             >
               {link.label}
-            </a>
-          ))}
+          </a>
+             ))}
+           </div>
+         )}
           <button
             type="button"
             onClick={() => scrollTo("#appointment")}
@@ -327,7 +329,7 @@ export default function Navbar() {
               letterSpacing: "0.08em",
             }}
           >
-            \uD83D\uDCDE Call: {CONTACT.phone}
+             Call: {CONTACT.phone}
           </a>
         </div>
       )}
