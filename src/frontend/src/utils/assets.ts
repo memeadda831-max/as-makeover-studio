@@ -34,5 +34,5 @@ export const CONTACT = {
   address:
     "Inside S Makeover and Studio, Jaloria Bas, Nagori Gate Kila Rd, near Pratap Kirana Store, Jodhpur, Rajasthan 342001",
   mapEmbed:
-    "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d7481014.468930534!2d69.68181822982432!3d23.71743936779848!2m3!1f0!2f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sask.sfx%20prosthetic%20makeup%20studio%20by%20shhavi!5e0!3m2!1sen!2sin!4v1779015853703!5m2!1sen!2sin",
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3576.828391122735!2d73.02666487487397!3d26.29966268616822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39418dac5015d14d%3A0x1c22f43a59b247e4!2sAs%20makeover%20and%20makeup%20studio%20SFX%20%26%20prosthetic%20makeup!5e0!3m2!1sen!2sin!4v1779016705327!5m2!1sen!2sin",
 };
