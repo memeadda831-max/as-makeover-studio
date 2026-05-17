@@ -30,7 +30,7 @@ export default function Footer() {
             paddingBottom: 48,
           }}
         >
-          {/* Column 1 */}
+          {/* Brand */}
           <div>
             <div
               style={{
@@ -39,22 +39,31 @@ export default function Footer() {
                 fontWeight: 700,
                 color: "#C4956A",
                 marginBottom: 8,
+                textShadow: "0 0 20px rgba(196,149,106,0.5)",
               }}
             >
               AS Makeover
             </div>
 
-            <p style={{ fontSize: 14, color: "#B09880" }}>
+            <p
+              style={{
+                fontSize: 14,
+                lineHeight: 1.7,
+                color: "#B09880",
+                maxWidth: 280,
+              }}
+            >
               Jodhpur's premier makeup studio led by certified artist Shila
               Kashyap.
             </p>
 
+            {/* Social icons */}
             <div
               style={{
                 marginTop: 20,
                 display: "flex",
-                gap: 12,
-                flexWrap: "wrap",
+                gap: 16,
+                alignItems: "center",
               }}
             >
               <a
@@ -62,11 +71,12 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  color: "#C4956A",
+                  fontSize: 30,
                   textDecoration: "none",
+                  filter: "drop-shadow(0 0 12px #ff4aa2)",
                 }}
               >
-                📸 Instagram
+                📸
               </a>
 
               <a
@@ -74,11 +84,12 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  color: "#C4956A",
+                  fontSize: 30,
                   textDecoration: "none",
+                  filter: "drop-shadow(0 0 12px #0A66C2)",
                 }}
               >
-                💼 LinkedIn
+                💼
               </a>
 
               <a
@@ -86,99 +97,122 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  color: "#C4956A",
+                  fontSize: 30,
                   textDecoration: "none",
+                  filter: "drop-shadow(0 0 12px #ffffff)",
                 }}
               >
-                ✖ X
+                ✖
               </a>
             </div>
           </div>
 
-          {/* Column 2 */}
+          {/* Services */}
           <div>
-            <h4 style={{ color: "#C4956A" }}>Our Services</h4>
+            <h4
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: 18,
+                fontWeight: 700,
+                color: "#C4956A",
+                marginBottom: 20,
+              }}
+            >
+              Our Services
+            </h4>
 
-            <ul style={{ listStyle: "none", padding: 0 }}>
+            <ul
+              style={{
+                listStyle: "none",
+                padding: 0,
+                margin: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: 10,
+              }}
+            >
               {SERVICES.map((s) => (
-                <li key={s} style={{ marginBottom: 8 }}>
-                  {s}
+                <li key={s} style={{ color: "#B09880" }}>
+                  ◆ {s}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 3 */}
+          {/* Contact */}
           <div>
-            <h4 style={{ color: "#C4956A" }}>Contact Us</h4>
+            <h4
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: 18,
+                fontWeight: 700,
+                color: "#C4956A",
+                marginBottom: 20,
+              }}
+            >
+              Contact Us
+            </h4>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <div>📍 {CONTACT.address}</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <div style={{ color: "#B09880" }}>
+                📍 {CONTACT.address}
+              </div>
 
               <a
                 href={`tel:${CONTACT.phone}`}
-                style={{ color: "#C4956A", textDecoration: "none" }}
+                style={{
+                  color: "#C4956A",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                }}
               >
                 📱 {CONTACT.phone}
               </a>
 
-              <a
-                href={CONTACT.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#B09880", textDecoration: "none" }}
-              >
-                📸 Instagram
-              </a>
+              <div style={{ color: "#B09880" }}>
+                🕐 Mon–Sat: 9AM–8PM | Sun: By Appointment
+              </div>
 
-              <a
-                href="https://www.linkedin.com/posts/shila-kashyap-4a9b36277_soft-makeup-look-dm-me-9549336555-activity-7403035533339377664-LQwO"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#B09880", textDecoration: "none" }}
-              >
-                💼 LinkedIn
-              </a>
-
-              <a
-                href="https://x.com/shilaasmek3772"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#B09880", textDecoration: "none" }}
-              >
-                ✖ X
-              </a>
-
+              {/* WhatsApp button */}
               <a
                 href={CONTACT.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  padding: "10px 20px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  marginTop: 8,
+                  padding: "12px 24px",
                   background: "#25D366",
                   color: "#fff",
                   textDecoration: "none",
+                  fontSize: 14,
+                  fontWeight: 700,
                   borderRadius: 50,
                   width: "fit-content",
+                  boxShadow: "0 0 25px rgba(37,211,102,0.7)",
                 }}
               >
-                WhatsApp Booking
+                💬 WhatsApp Booking
               </a>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Bottom */}
       <div
         style={{
           borderTop: "1px solid rgba(196,149,106,0.15)",
-          padding: "20px",
+          padding: "20px 24px",
           textAlign: "center",
           fontSize: 13,
           color: "#7A6050",
         }}
       >
-        © {new Date().getFullYear()} AS Makeover and Makeup Studio
+        © {new Date().getFullYear()} AS Makeover and Makeup Studio, Jodhpur |
+        Designed with ♥ in Jodhpur
       </div>
     </footer>
   );
